@@ -8,3 +8,17 @@
 -->
 
 <!-- towncrier release notes start -->
+
+## 2.0.0a1 (2025-04-17)
+
+
+### New features:
+
+- Disable Social Media control panel configlet @ericof 
+- Implement `plonegovbr.socialmedia.links` behavior @ericof 
+- Implement `plonegovbr.socialmedia.settings` behavior, add it to **Plone Site** content type @ericof 
+
+
+### Internal:
+
+- Initial release @ericof

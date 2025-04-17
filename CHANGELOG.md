@@ -7,6 +7,48 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a1 (2025-04-17)
+
+### Backend
+
+
+#### New features:
+
+- Disable Social Media control panel configlet @ericof 
+- Implement `plonegovbr.socialmedia.links` behavior @ericof 
+- Implement `plonegovbr.socialmedia.settings` behavior, add it to **Plone Site** content type @ericof 
+
+
+#### Internal:
+
+- Initial release @ericof 
+
+
+
+### Frontend
+
+#### Feature
+
+- Implement Follow Us block @ericof 
+- Implement `@plonegovbr/volto-social-media/components/FooterLinks/FooterLinks` component @ericof 
+- Implement `@plonegovbr/volto-social-media/components/SocialNetworks/SocialNetworks` component @ericof 
+- Implement `@plonegovbr/volto-social-media/hooks/useSocialMedia` and `@plonegovbr/volto-social-media/hooks/useNetworks` hooks @ericof 
+
+#### Internal
+
+- Initial release @ericof 
+
+
+
+### Project
+
+
+#### Internal
+
+- Initial release @ericof 
+
+
+
 
 ## 1.0.0 (2024-09-03)
 
