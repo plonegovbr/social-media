@@ -1,9 +1,7 @@
-
 import pytest
 
 
 class TestBehaviorLinks:
-
     @pytest.mark.parametrize("role,path", (["manager", "/profiles"],))
     def test_added_to_content(self, request_roles, role: str, path: str):
         request = request_roles(role)
