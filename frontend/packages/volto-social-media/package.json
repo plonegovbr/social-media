@@ -1,6 +1,6 @@
 {
   "name": "@plonegovbr/volto-social-media",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Social media components for Plone and Volto",
   "main": "src/index.js",
   "license": "MIT",

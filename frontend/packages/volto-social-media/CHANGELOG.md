@@ -8,6 +8,12 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.2 (2025-04-17)
+
+### Internal
+
+- Fixes `repository.toml` to publish packages @ericof 
+
 ## 2.0.0-alpha.1 (2025-04-17)
 
 ### Feature
