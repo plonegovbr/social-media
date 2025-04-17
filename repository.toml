@@ -1,0 +1,37 @@
+[repository]
+name = "social-media"
+managed_by_uv = false
+changelog = "CHANGELOG.md"
+version = "version.txt"
+compose = "docker-compose.yml"
+
+[repository.towncrier]
+section = "Project"
+settings = "towncrier.toml"
+
+[backend]
+path = "backend"
+
+[backend.package]
+name = "plonegovbr.socialmedia"
+path = "backend"
+changelog = "backend/CHANGELOG.md"
+towncrier_settings = "backend/pyproject.toml"
+base_package = "Products.CMFPlone"
+publish = false
+
+[frontend]
+path = "frontend"
+
+[frontend.package]
+name = "@plonegovbr/volto-social-media"
+path = "frontend/packages/volto-social-media"
+changelog = "frontend/packages/volto-social-media/CHANGELOG.md"
+towncrier_settings = "frontend/packages/volto-social-media/towncrier.toml"
+base_package = "@plone/volto"
+publish = false
+
+[cookieplone]
+template = "project"
+template_version = "a83957d67a92031ad7f79b150c66349e3e662eef"
+generated_date = "2025-04-16 00:13:45"

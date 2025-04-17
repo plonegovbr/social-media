@@ -1,0 +1,5 @@
+@mixin animate-network-hover() {
+  transform: var(--social-network-animation-transform);
+  -webkit-transition: var(--social-network-animation-transition);
+  transition: var(--social-network-animation-transition);
+}

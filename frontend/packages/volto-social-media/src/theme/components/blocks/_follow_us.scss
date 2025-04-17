@@ -1,0 +1,22 @@
+.block.follow_us {
+  .follow_us.title {
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: var(--block-alignment);
+  }
+
+  .social-networks {
+    padding-top: 0.5rem;
+  }
+}
+
+// Block inside a grid
+.block.gridBlock {
+  .block.follow_us.center {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+}

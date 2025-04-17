@@ -1,0 +1,50 @@
+{
+  "name": "@plonegovbr/volto-social-media",
+  "version": "2.0.0-alpha.0",
+  "description": "Social media components for Plone and Volto",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "author": "PloneGov-BR",
+  "homepage": "https://github.com/plonegovbr/social-media#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:plonegovbr/social-media.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "dry-release": "release-it --dry-run",
+    "release": "release-it",
+    "release-major-alpha": "release-it major --preRelease=alpha",
+    "release-alpha": "release-it --preRelease=alpha"
+  },
+  "addons": [
+    "@kitconcept/volto-light-theme"
+  ],
+  "dependencies": {
+    "@plone/components": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@plone/scripts": "^3.6.2",
+    "@plone/types": "workspace:*",
+    "@types/jest": "^29.5.8",
+    "@types/lodash": "^4.14.201",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react-intl": "3.12.1",
+    "release-it": "^17.7.0",
+    "@kitconcept/volto-light-theme": "^6.0.0a21"
+  }
+}

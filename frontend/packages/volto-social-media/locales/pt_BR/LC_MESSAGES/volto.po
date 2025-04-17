@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-06T16:01:32.969Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language: \n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Language-Code: pt_BR\n"
+"Language-Name: Português do Brasil\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#. Default: "Add link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Add link"
+msgstr "Adicionar link"
+
+#. Default: "Align"
+#: messages
+msgid "Align"
+msgstr "Alinhamento"
+
+#. Default: "Animate Icon"
+#: messages
+msgid "Animate Icon"
+msgstr "Animar ícone"
+
+#. Default: "Follow Us"
+#: components/Blocks/FollowUs/Data
+msgid "Follow Us"
+msgstr "Siga-nos"
+
+#. Default: "Follow Us Block"
+#: messages
+msgid "Follow Us Block"
+msgstr "Bloco Siga-nos"
+
+#. Default: "Headline"
+#: messages
+msgid "Headline"
+msgstr "Chamada"
+
+#. Default: "Link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Link"
+msgstr "Link"
+
+#. Default: "Network"
+#: components/Widgets/schema/socialMediaSchema
+#: messages
+msgid "Network"
+msgstr "Rede social"
+
+#. Default: "Networks"
+#: messages
+msgid "Networks"
+msgstr "Redes sociais"
+
+#. Default: "Open in a new tab"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Open in a new tab"
+msgstr "Abrir em nova aba"
+
+#. Default: "Target"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Target"
+msgstr "Alvo"
+
+#. Default: "Title"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Title"
+msgstr "Título"

@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: en\n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. Default: "Add link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Add link"
+msgstr ""
+
+#. Default: "Align"
+#: messages
+msgid "Align"
+msgstr ""
+
+#. Default: "Animate Icon"
+#: messages
+msgid "Animate Icon"
+msgstr ""
+
+#. Default: "Follow Us"
+#: components/Blocks/FollowUs/Data
+msgid "Follow Us"
+msgstr ""
+
+#. Default: "Follow Us Block"
+#: messages
+msgid "Follow Us Block"
+msgstr ""
+
+#. Default: "Headline"
+#: messages
+msgid "Headline"
+msgstr ""
+
+#. Default: "Link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Link"
+msgstr ""
+
+#. Default: "Network"
+#: components/Widgets/schema/socialMediaSchema
+#: messages
+msgid "Network"
+msgstr ""
+
+#. Default: "Networks"
+#: messages
+msgid "Networks"
+msgstr ""
+
+#. Default: "Open in a new tab"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Open in a new tab"
+msgstr ""
+
+#. Default: "Target"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Target"
+msgstr ""
+
+#. Default: "Title"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Title"
+msgstr ""

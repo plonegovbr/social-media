@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"POT-Creation-Date: 2025-04-17T15:54:24.422Z\n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#. Default: "Add link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Add link"
+msgstr ""
+
+#. Default: "Align"
+#: messages
+msgid "Align"
+msgstr ""
+
+#. Default: "Animate Icon"
+#: messages
+msgid "Animate Icon"
+msgstr ""
+
+#. Default: "Follow Us"
+#: components/Blocks/FollowUs/Data
+msgid "Follow Us"
+msgstr ""
+
+#. Default: "Follow Us Block"
+#: messages
+msgid "Follow Us Block"
+msgstr ""
+
+#. Default: "Headline"
+#: messages
+msgid "Headline"
+msgstr ""
+
+#. Default: "Link"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Link"
+msgstr ""
+
+#. Default: "Network"
+#: components/Widgets/schema/socialMediaSchema
+#: messages
+msgid "Network"
+msgstr ""
+
+#. Default: "Networks"
+#: messages
+msgid "Networks"
+msgstr ""
+
+#. Default: "Open in a new tab"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Open in a new tab"
+msgstr ""
+
+#. Default: "Target"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Target"
+msgstr ""
+
+#. Default: "Title"
+#: components/Widgets/schema/socialMediaSchema
+msgid "Title"
+msgstr ""
