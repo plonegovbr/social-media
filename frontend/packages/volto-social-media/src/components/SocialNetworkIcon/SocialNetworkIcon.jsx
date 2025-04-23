@@ -13,7 +13,7 @@ const SocialNetworkIcon = (props) => {
   return (
     <Icon
       name={networkIcon}
-      size={size}
+      size={size || '47px'}
       color={color}
       className={cx(`${className}`, 'social-network', `${id}`, {
         animate: animate,
