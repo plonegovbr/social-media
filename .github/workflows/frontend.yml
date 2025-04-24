@@ -26,28 +26,28 @@ on:
 jobs:
   code-analysis:
     name: "Frontend: Codeanalysis"
-    uses: plone/meta/.github/workflows/frontend-code.yml@issue-277-gh
+    uses: plone/meta/.github/workflows/frontend-code.yml@issue-277-gha
     with:
       node-version: ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
 
   i18n:
     name: "Frontend: i18n"
-    uses: plone/meta/.github/workflows/frontend-i18n.yml@issue-277-gh
+    uses: plone/meta/.github/workflows/frontend-i18n.yml@issue-277-gha
     with:
       node-version: ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
 
   unit:
     name: "Frontend: Unit tests"
-    uses: plone/meta/.github/workflows/frontend-unit.yml@issue-277-gh
+    uses: plone/meta/.github/workflows/frontend-unit.yml@issue-277-gha
     with:
       node-version: ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
 
   release:
     name: "Frontend: Build and publish container image"
-    uses: plone/meta/.github/workflows/container-image-build-push.yml@issue-277-gh
+    uses: plone/meta/.github/workflows/container-image-build-push.yml@issue-277-gha
     needs:
       - code-analysis
       - i18n
