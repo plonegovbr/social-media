@@ -59,9 +59,9 @@ jobs:
       devops: ${{ steps.filter.outputs.devops }}
       docs: ${{ steps.filter.outputs.docs }}
       frontend: ${{ steps.filter.outputs.frontend }}
-      base-tag: ${{ steps.vars.outputs.BASE_TAG }}
-      plone-version: ${{ steps.vars.outputs.PLONE_VERSION }}
-      volto-version: ${{ steps.vars.outputs.VOLTO_VERSION }}
+      base-tag: ${{ steps.vars.outputs.base-tag }}
+      plone-version: ${{ steps.vars.outputs.plone-version }}
+      volto-version: ${{ steps.vars.outputs.volto-version }}
 
     steps:
       - name: Checkout
