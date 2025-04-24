@@ -1,12 +1,21 @@
 import { useMemo } from 'react';
-import { useSocialMedia } from './useSocialMedia';
+import { useSelector, shallowEqual } from 'react-redux';
 import config from '@plone/volto/registry';
+import { useLiveData } from './useLiveData';
 
 export const useNetworks = (allowedNetworks = []) => {
   const { settings } = config;
   const configNetworks = settings.socialNetworks || [];
-  const socialMedia = useSocialMedia();
-  const backendNetworks = socialMedia?.social_links || [];
+
+  const content = useSelector((state) => state.content.data, shallowEqual);
+
+  const social_links = useLiveData(
+    content,
+    'plonegovbr.socialmedia.settings',
+    'social_links',
+  );
+
+  const backendNetworks = social_links || [];
   const networks =
     backendNetworks.length > 0 ? backendNetworks : configNetworks;
 
@@ -14,7 +23,6 @@ export const useNetworks = (allowedNetworks = []) => {
     if (allowedNetworks.length === 0) {
       return networks;
     }
-
     const indexedNetworks = Object.fromEntries(
       networks.map((net) => [net.id, net]),
     );

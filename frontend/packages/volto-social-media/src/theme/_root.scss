@@ -1,7 +1,13 @@
 :root {
-  --social-network-icon-color-main: #023d6b;
+  --social-network-icon-color-main: var(
+    --footer-foreground,
+    var(--link-foreground-color, #023d6b)
+  );
   --social-network-background-main: transparent;
-  --social-network-icon-color-hover: #011a2c;
+  --social-network-icon-color-hover: var(
+    --footer-foreground,
+    var(--link-foreground-color, #011a2c)
+  );
   --social-network-background-hover: transparent;
   --social-network-animation-transform: translateY(-2px);
   --social-network-animation-transition: all 0.4s
