@@ -69,6 +69,7 @@ jobs:
 
       - name: Compute several vars needed for the CI
         id: vars
+        shell: bash
         run: |
           echo "base-tag=sha-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "plone-version=$(cat backend/version.txt)" >> $GITHUB_OUTPUT

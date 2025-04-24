@@ -24,7 +24,16 @@ on:
         default: backend
 
 jobs:
-
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        shell: bash
+        run: |
+          echo "base-tag=${{ inputs.base-tag }}"
+          echo "working-directory=${{ inputs.working-directory }}"
+          echo "python-version=${{ inputs.python-version }}"
+          echo "plone-version=${{ inputs.plone-version }}"
   lint:
     name: "Backend: Lint"
     uses: plone/meta/.github/workflows/backend-lint.yml@issue-277-gha
