@@ -36,7 +36,7 @@ jobs:
           echo "plone-version=${{ inputs.plone-version }}"
   lint:
     name: "Backend: Lint"
-    uses: plone/meta/.github/workflows/backend-lint.yml@issue-277-gha
+    uses: plone/meta/.github/workflows/backend-lint.yml@2.x
     with:
       python-version: ${{ inputs.python-version }}
       plone-version: ${{ inputs.plone-version }}
@@ -44,7 +44,7 @@ jobs:
 
   test:
     name: "Backend: Test"
-    uses: plone/meta/.github/workflows/backend-pytest.yml@issue-277-gha
+    uses: plone/meta/.github/workflows/backend-pytest.yml@2.x
     with:
       python-version: ${{ inputs.python-version }}
       plone-version: ${{ inputs.plone-version }}
@@ -52,7 +52,7 @@ jobs:
 
   coverage:
     name: "Backend: Test"
-    uses: plone/meta/.github/workflows/backend-pytest-coverage.yml@issue-277-gha
+    uses: plone/meta/.github/workflows/backend-pytest-coverage.yml@2.x
     needs:
       - test
     with:
@@ -62,7 +62,7 @@ jobs:
 
   release:
     name: "Backend: Build and publish Container Image"
-    uses: plone/meta/.github/workflows/container-image-build-push.yml@issue-277-gha
+    uses: plone/meta/.github/workflows/container-image-build-push.yml@2.x
     needs:
       - lint
       - coverage
