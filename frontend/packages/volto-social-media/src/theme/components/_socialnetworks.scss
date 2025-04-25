@@ -7,7 +7,12 @@ ul.social-networks {
   margin-top: $spacing-xsmall;
   margin-bottom: $spacing-xsmall;
   list-style: none;
-  li.item {
-    padding: 0 $spacing-xsmall;
+  li {
+    margin-right: 15px;
+
+    a {
+      display: block;
+      line-height: 0;
+    }
   }
 }

@@ -12,6 +12,7 @@ import instagramIcon from '../icons/instagram.svg';
 import linkedinIcon from '../icons/linkedin.svg';
 import mastodonIcon from '../icons/mastodon.svg';
 import mediumIcon from '../icons/medium.svg';
+import rssIcon from '../icons/rss.svg';
 import slackIcon from '../icons/slack.svg';
 import soundcloudIcon from '../icons/soundcloud.svg';
 import spotifyIcon from '../icons/spotify.svg';
@@ -45,6 +46,7 @@ export default function install(config: ConfigType) {
     linkedin: { id: 'linkedin', title: 'LinkedIn', icon: linkedinIcon },
     mastodon: { id: 'mastodon', title: 'Mastodon', icon: mastodonIcon },
     medium: { id: 'medium', title: 'Medium', icon: mediumIcon },
+    rss: { id: 'rss', title: 'RSS', icon: rssIcon },
     slack: { id: 'slack', title: 'Slack', icon: slackIcon },
     soundcloud: { id: 'soundcloud', title: 'Soundcloud', icon: soundcloudIcon },
     spotify: { id: 'spotify', title: 'Spotify', icon: spotifyIcon },

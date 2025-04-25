@@ -26,9 +26,6 @@
     "release-major-alpha": "release-it major --preRelease=alpha",
     "release-alpha": "release-it --preRelease=alpha"
   },
-  "addons": [
-    "@kitconcept/volto-light-theme"
-  ],
   "dependencies": {
     "@plone/components": "workspace:*"
   },
@@ -43,8 +40,7 @@
     "@types/lodash": "^4.14.201",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "react-intl": "3.12.1",
-    "release-it": "^17.7.0",
-    "@kitconcept/volto-light-theme": "^6.0.0a21"
+    "react-intl": "^3.12.1",
+    "release-it": "^17.7.0"
   }
 }
