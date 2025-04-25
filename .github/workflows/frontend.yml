@@ -45,16 +45,6 @@ jobs:
       node-version: ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
 
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug
-        shell: bash
-        run: |
-          echo "base-tag=${{ inputs.base-tag }}"
-          echo "working-directory=${{ inputs.working-directory }}"
-          echo "volto-version=${{ inputs.volto-version }}"
-
   release:
     name: "Frontend: Build and publish container image"
     uses: plone/meta/.github/workflows/container-image-build-push.yml@2.x
