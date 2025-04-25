@@ -12,7 +12,7 @@ const StoryComponent = injectIntl(({ children, ...args }) => {
 
   return (
     <Wrapper>
-      <div>
+      <div style={{ '--social-network-icon-color-main': args.color }}>
         <SocialNetworks
           networks={networks.map((network) => {
             const info = network.method();
@@ -39,6 +39,13 @@ export default {
   title: 'Components/SocialNetworks/SocialNetworks',
   component: SocialNetworks,
   argTypes: {
+    color: {
+      name: 'Icon color',
+      defaultValue: '#000000',
+      control: {
+        type: 'text',
+      },
+    },
     id: {
       name: 'Social Network ID',
       defaultValue: '',
