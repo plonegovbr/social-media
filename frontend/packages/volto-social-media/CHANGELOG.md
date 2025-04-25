@@ -8,6 +8,12 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.4 (2025-04-25)
+
+### Bugfix
+
+- Fix icons colors @ericof 
+
 ## 2.0.0-alpha.3 (2025-04-25)
 
 ### Feature

@@ -7,6 +7,38 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a4 (2025-04-25)
+
+### Backend
+
+
+#### New features:
+
+- Support Python 3.10. @ericof 
+- Support Python 3.11. @ericof 
+- Support Python 3.13. @ericof 
+
+
+
+### Frontend
+
+#### Bugfix
+
+- Fix icons colors @ericof 
+
+
+
+### Project
+
+
+#### Internal
+
+- GHA: Add changelog workflow to be triggered during pull requests. @ericof 
+- GHA: Refactor worflows to use plone/meta. @ericof 
+- GHA: Remove internal debug @ericof 
+
+
+
 ## 2.0.0a3 (2025-04-25)
 
 ### Backend

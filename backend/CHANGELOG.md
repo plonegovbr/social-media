@@ -9,6 +9,15 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0a4 (2025-04-25)
+
+
+### New features:
+
+- Support Python 3.10. @ericof 
+- Support Python 3.11. @ericof 
+- Support Python 3.13. @ericof 
+
 ## 2.0.0a3 (2025-04-25)
 
 No significant changes.
