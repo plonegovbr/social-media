@@ -7,6 +7,41 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a3 (2025-04-25)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+#### Feature
+
+- Use VLT 6 alpha latests code and developments in there. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+- Use VLT slots for footer `FollowUs`. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+- Footer is now updated live. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+- Unify icons, adjust sizes. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+
+#### Bugfix
+
+- Fix settings of the `inherit` endpoint expanders. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+
+#### Internal
+
+- VLT as an add-on development dependency only (main `package.json`), not as direct dependency. @sneridagh [#1](https://github.com/plonegovbr/social-media/issue/1)
+
+
+
+### Project
+
+No significant changes.
+
+
+
+
 ## 2.0.0a2 (2025-04-17)
 
 ### Backend
