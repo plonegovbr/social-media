@@ -37,7 +37,7 @@ Instagram.args = {
 
 export const Twitter = StoryComponent.bind({});
 Twitter.args = {
-  id: 'twitter',
+  id: 'x',
   icon: 'twitter',
   title: 'Twitter',
   href: 'https://twitter.com/ploneorgbr/',
