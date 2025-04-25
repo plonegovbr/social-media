@@ -1,4 +1,4 @@
-name: "PortalBrasil: Educação - Changelog"
+name: "Changelog"
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened, labeled, unlabeled]
@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 22.x
-  ADDON_NAME: educacao
+  ADDON_NAME: volto-social-media
   BASE_BRANCH: main
 
 jobs:
