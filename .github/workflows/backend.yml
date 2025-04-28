@@ -41,8 +41,8 @@ jobs:
         python-version: ["3.13", "3.12", "3.11", "3.10"]
         plone-version: ["6.1-latest", "6.0-latest"]
     with:
-      python-version: ${{ inputs.python-version }}
-      plone-version: ${{ inputs.plone-version }}
+      python-version: ${{ matrix.python-version }}
+      plone-version: ${{ matrix.plone-version }}
       working-directory: ${{ inputs.working-directory }}
 
   coverage:
