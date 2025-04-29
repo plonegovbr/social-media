@@ -7,6 +7,7 @@ const SocialNetwork = (props) => {
   const { id, title, href, animate } = props;
   return (
     <UniversalLink
+      title={title}
       href={href}
       openLinkInNewTab
       className={cx('social-network', 'item', `${id}`, {
