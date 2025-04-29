@@ -1590,8 +1590,8 @@ importers:
         specifier: workspace:^
         version: link:../../../../../core/packages/components
       '@plonegovbr/volto-social-media':
-        specifier: workspace:*
-        version: link:../../../../volto-social-media
+        specifier: ^2.0.0-alpha.4
+        version: 2.0.0-alpha.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.6.12(prettier@3.2.5))
       classnames:
         specifier: ^2.2.6
         version: 2.2.6
@@ -3608,6 +3608,15 @@ packages:
       react-dom:
         optional: true
 
+  '@plone/components@3.0.2':
+    resolution: {integrity: sha512-BLxq4HMcmGux+CD6nOyl0YOqpTiB4yz/h4y/dcGSH3EwhxB3vaEq/Vcoss4qlzHJFfguemNPehJPGP8tq/Z6ww==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+
   '@plone/registry@2.5.1':
     resolution: {integrity: sha512-9i2je02GYi4VcATBP6DAxKsVj79/ragOxqsYY+BzKtR2kmqFVl4BKg3/LkRpNvTp6X/O0JKuJhR7joQm0daMpQ==}
     peerDependencies:
@@ -3630,6 +3639,12 @@ packages:
   '@plone/volto@18.14.0':
     resolution: {integrity: sha512-/1AazfW8BWuhXcpj0ywegT3JnoTAhLbDX4eHcpR+RL0bxoo+ltSfMcavr2Y31JubcciEVDYXiPo8xx+i0oNvDw==}
     engines: {node: ^20 || ^22}
+
+  '@plonegovbr/volto-social-media@2.0.0-alpha.4':
+    resolution: {integrity: sha512-eguITKkLOcjA0TEsRjlj8pCrJ7LcLQmYwt39eCN/FdQ9aLKvN6xSEz4RYKzai7jyevKXbbrLY2OLpWd5yUC9/Q==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.16':
     resolution: {integrity: sha512-kLQc9xz6QIqd2oIYyXRUiAp79kGpFBm3fEM9ahfG1HI0WI5gdZ2OVHWdmZYnwODt7ISck+QuQ6sBPrtvUBML7Q==}
@@ -17218,6 +17233,19 @@ snapshots:
     transitivePeerDependencies:
       - storybook
 
+  '@plone/components@3.0.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.6.12(prettier@3.2.5))':
+    dependencies:
+      '@react-aria/utils': 3.28.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@react-spectrum/utils': 3.12.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@storybook/test': 8.6.12(storybook@8.6.12(prettier@3.2.5))
+      clsx: 2.1.1
+      react: 18.2.0
+      react-aria-components: 1.8.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    optionalDependencies:
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - storybook
+
   '@plone/registry@2.5.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       auto-config-loader: 1.7.8
@@ -17414,6 +17442,14 @@ snapshots:
       - seamless-immutable
       - supports-color
       - utf-8-validate
+
+  '@plonegovbr/volto-social-media@2.0.0-alpha.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.6.12(prettier@3.2.5))':
+    dependencies:
+      '@plone/components': 3.0.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.6.12(prettier@3.2.5))
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - storybook
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.14.2)(sockjs-client@1.4.0)(type-fest@4.40.0)(webpack-dev-server@4.11.1(debug@4.3.2)(webpack@5.90.1(esbuild@0.25.2)))(webpack-hot-middleware@2.26.1)(webpack@5.90.1(esbuild@0.25.2))':
     dependencies:
