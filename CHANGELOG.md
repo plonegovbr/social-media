@@ -7,6 +7,32 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a5 (2025-04-29)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+#### Bugfix
+
+- Added title in UniversalLink for Networks component to fix a11y issues. @sneridagh [#4](https://github.com/plonegovbr/social-media/issue/4)
+
+
+
+### Project
+
+
+#### Internal
+
+- GHA: Fix backend test matrix @ericof 
+
+
+
 ## 2.0.0a4 (2025-04-25)
 
 ### Backend

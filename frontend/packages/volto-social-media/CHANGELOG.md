@@ -8,6 +8,12 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.5 (2025-04-29)
+
+### Bugfix
+
+- Added title in UniversalLink for Networks component to fix a11y issues. @sneridagh [#4](https://github.com/plonegovbr/social-media/issue/4)
+
 ## 2.0.0-alpha.4 (2025-04-25)
 
 ### Bugfix
