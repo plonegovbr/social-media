@@ -1,1 +1,0 @@
-Fixed Redux complaining about returining a different object on every rerender. @sneridagh

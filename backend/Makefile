@@ -28,8 +28,13 @@ endif
 
 PLONE_SITE_ID=Plone
 BACKEND_FOLDER=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-PLONE_VERSION=$(shell cat $(BACKEND_FOLDER)/version.txt)
 EXAMPLE_CONTENT_FOLDER=${BACKEND_FOLDER}/src/plonegovbr/socialmedia/setuphandlers/examplecontent
+
+ifdef PLONE_VERSION
+PLONE_VERSION := $(PLONE_VERSION)
+else
+PLONE_VERSION := $(shell cat $(BACKEND_FOLDER)/version.txt)
+endif
 
 VENV_FOLDER=$(BACKEND_FOLDER)/.venv
 BIN_FOLDER=$(VENV_FOLDER)/bin

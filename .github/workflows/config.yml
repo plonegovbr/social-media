@@ -1,4 +1,4 @@
-name: "VLT: Compute Config variables"
+name: "Compute Config variables"
 
 on:
   workflow_call:

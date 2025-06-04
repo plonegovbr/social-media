@@ -6,6 +6,7 @@ on:
       - "backend/**"
       - "frontend/**"
       - ".github/workflows/backend.yml"
+      - ".github/workflows/docs.yml"
       - ".github/workflows/frontend.yml"
       - ".github/workflows/main.yml"
       - "devops/**"

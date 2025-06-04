@@ -8,6 +8,16 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.6 (2025-06-04)
+
+### Bugfix
+
+- Fixed Redux complaining about returining a different object on every rerender. @sneridagh 
+
+### Internal
+
+- Updated to Volto 18.22.0 and VLT 7.0.0a5. @sneridagh 
+
 ## 2.0.0-alpha.5 (2025-04-29)
 
 ### Bugfix
