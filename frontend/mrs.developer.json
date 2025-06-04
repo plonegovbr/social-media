@@ -4,12 +4,12 @@
     "package": "@plone/volto",
     "url": "git@github.com:plone/volto.git",
     "https": "https://github.com/plone/volto.git",
-    "tag": "18.14.0",
+    "tag": "18.22.0",
     "filterBlobs": true
   },
   "volto-light-theme": {
     "output": "packages",
-    "develop": true,
+    "develop": false,
     "package": "@kitconcept/volto-light-theme",
     "url": "git@github.com:kitconcept/volto-light-theme.git",
     "https": "https://github.com/kitconcept/volto-light-theme.git",
