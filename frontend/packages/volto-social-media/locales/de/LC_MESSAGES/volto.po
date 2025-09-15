@@ -14,60 +14,60 @@ msgstr ""
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add link"
-msgstr ""
+msgstr "Link hinzufügen"
 
 #. Default: "Align"
 #: messages
 msgid "Align"
-msgstr ""
+msgstr "Ausrichtung"
 
 #. Default: "Animate Icon"
 #: messages
 msgid "Animate Icon"
-msgstr ""
+msgstr "Symbol animieren"
 
 #. Default: "Follow Us"
 #: components/Blocks/FollowUs/Data
 msgid "Follow Us"
-msgstr ""
+msgstr "Social Media"
 
 #. Default: "Follow Us Block"
 #: messages
 msgid "Follow Us Block"
-msgstr ""
+msgstr "Social Media Block"
 
 #. Default: "Headline"
 #: messages
 msgid "Headline"
-msgstr ""
+msgstr "Überschrift"
 
 #. Default: "Link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #. Default: "Network"
 #: components/Widgets/schema/socialMediaSchema
 #: messages
 msgid "Network"
-msgstr ""
+msgstr "Netzwerk"
 
 #. Default: "Networks"
 #: messages
 msgid "Networks"
-msgstr ""
+msgstr "Netzwerke"
 
 #. Default: "Open in a new tab"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Open in a new tab"
-msgstr ""
+msgstr "In neuem Tab öffnen"
 
 #. Default: "Target"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Target"
-msgstr ""
+msgstr "Ziel"
 
 #. Default: "Title"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Title"
-msgstr ""
+msgstr "Titel"
