@@ -8,6 +8,12 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.7 (2025-09-15)
+
+### Internal
+
+- Add german translations @iRohitSingh [#7](https://github.com/plonegovbr/social-media/issue/7)
+
 ## 2.0.0-alpha.6 (2025-06-04)
 
 ### Bugfix

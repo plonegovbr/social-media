@@ -7,6 +7,30 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a7 (2025-09-15)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+#### Internal
+
+- Add german translations @iRohitSingh [#7](https://github.com/plonegovbr/social-media/issue/7)
+
+
+
+### Project
+
+No significant changes.
+
+
+
+
 ## 2.0.0a6 (2025-06-04)
 
 ### Backend
