@@ -9,6 +9,13 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0a8 (2025-09-16)
+
+
+### Bug fixes:
+
+- Update German translation. @davisagli 
+
 ## 2.0.0a7 (2025-09-15)
 
 No significant changes.

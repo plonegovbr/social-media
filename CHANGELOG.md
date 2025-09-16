@@ -7,6 +7,34 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a8 (2025-09-16)
+
+### Backend
+
+
+#### Bug fixes:
+
+- Update German translation. @davisagli 
+
+
+
+### Frontend
+
+#### Bugfix
+
+- Update German translation. @davisagli 
+
+
+
+### Project
+
+
+#### Internal
+
+- Update repository.toml file. @ericof 
+
+
+
 ## 2.0.0a7 (2025-09-15)
 
 ### Backend

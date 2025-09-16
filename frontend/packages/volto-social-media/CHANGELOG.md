@@ -8,6 +8,12 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0-alpha.8 (2025-09-16)
+
+### Bugfix
+
+- Update German translation. @davisagli 
+
 ## 2.0.0-alpha.7 (2025-09-15)
 
 ### Internal
