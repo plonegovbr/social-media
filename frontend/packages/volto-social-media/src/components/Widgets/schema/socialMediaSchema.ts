@@ -18,7 +18,7 @@ const messages = defineMessages({
     defaultMessage: 'Link',
   },
   addLink: {
-    id: 'Add link',
+    id: 'Add social media profile',
     defaultMessage: 'Add link',
   },
   Target: {

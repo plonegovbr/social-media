@@ -13,8 +13,8 @@ msgstr ""
 
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
-msgid "Add link"
-msgstr "Link hinzufügen"
+msgid "Add social media profile"
+msgstr "Dienst hinzufügen"
 
 #. Default: "Align"
 #: messages
