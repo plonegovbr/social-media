@@ -7,6 +7,40 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0a9 (2025-09-28)
+
+### Backend
+
+
+#### New features:
+
+- Add Basque translation @erral 
+- Add Spanish translation @erral 
+
+
+#### Internal:
+
+- Add plone.exportimport as a required dependency. @ericof 
+
+
+
+### Frontend
+
+#### Feature
+
+- Add Basque translation @erral 
+
+
+
+### Project
+
+
+#### Internal
+
+- GHA: Remove support for Plone 6 and do not fail-fast on Backend tests. @ericof 
+
+
+
 ## 2.0.0a8 (2025-09-16)
 
 ### Backend

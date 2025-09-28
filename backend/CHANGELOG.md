@@ -9,6 +9,19 @@
 
 <!-- towncrier release notes start -->
 
+## 2.0.0a9 (2025-09-28)
+
+
+### New features:
+
+- Add Basque translation @erral 
+- Add Spanish translation @erral 
+
+
+### Internal:
+
+- Add plone.exportimport as a required dependency. @ericof 
+
 ## 2.0.0a8 (2025-09-16)
 
 
