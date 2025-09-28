@@ -1,1 +1,1 @@
-GHA: Do not fail-fast on Backend tests. @ericof
+GHA: Remove support for Plone 6 and do not fail-fast on Backend tests. @ericof
