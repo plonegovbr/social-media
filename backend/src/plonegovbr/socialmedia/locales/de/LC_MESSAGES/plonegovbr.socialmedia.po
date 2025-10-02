@@ -81,7 +81,7 @@ msgstr ""
 
 #: plonegovbr/socialmedia/behaviors/social_media.py:51
 msgid "To be used with some integrations like Open Graph data"
-msgstr ""
+msgstr "Zur Verwendung mit Integrationen wie Open Graph Data"
 
 #: plonegovbr/socialmedia/profiles.zcml:30
 msgid "Uninstall Social Media support for Plone setup."
