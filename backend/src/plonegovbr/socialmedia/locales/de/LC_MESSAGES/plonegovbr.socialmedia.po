@@ -81,7 +81,7 @@ msgstr ""
 
 #: plonegovbr/socialmedia/behaviors/social_media.py:51
 msgid "To be used with some integrations like Open Graph data"
-msgstr ""
+msgstr "Die Facebook App-ID wird für einige Social Media Dienste wie Facebook oder Instagram bzw. für Open Graph verwendet"
 
 #: plonegovbr/socialmedia/profiles.zcml:30
 msgid "Uninstall Social Media support for Plone setup."
