@@ -11,11 +11,15 @@ MAKEFLAGS+=--no-builtin-rules
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 GIT_FOLDER=$(CURRENT_DIR)/.git
 
-PROJECT_NAME=social-media
-STACK_NAME=social-media-plone-org-br
+REPOSITORY_SETTINGS := $(shell uvx repoplone settings dump)
 
-VOLTO_VERSION=$(shell cat frontend/mrs.developer.json | python -c "import sys, json; print(json.load(sys.stdin)['core']['tag'])")
-PLONE_VERSION=$(shell cat backend/version.txt)
+PROJECT_NAME := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.name')
+
+VOLTO_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.volto_version')
+PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
+
+STACK_FILE := docker-compose-dev.yml
+DOCKER_COMPOSE := VOLTO_VERSION=$(VOLTO_VERSION) PLONE_VERSION=$(PLONE_VERSION) docker compose
 
 # We like colors
 # From: https://coderwall.com/p/izxssa/colored-makefile-for-golang-projects
@@ -32,6 +36,14 @@ all: install
 .PHONY: help
 help: ## This help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+
+.PHONY: debug-settings
+debug-settings:  ## Debug settings
+	@echo "Debug settings"
+	@echo "PROJECT_NAME: $(PROJECT_NAME)"
+	@echo "VOLTO_VERSION: $(VOLTO_VERSION)"
+	@echo "PLONE_VERSION: $(PLONE_VERSION)"
 
 ###########################################
 # Frontend
@@ -145,28 +157,28 @@ build-images:  ## Build container images
 .PHONY: stack-start
 stack-start:  ## Local Stack: Start Services
 	@echo "Start local Docker stack"
-	VOLTO_VERSION=$(VOLTO_VERSION) PLONE_VERSION=$(PLONE_VERSION) docker compose -f docker-compose.yml up -d --build
+	$(DOCKER_COMPOSE) -f docker-compose.yml up -d --build
 	@echo "Now visit: http://social-media.localhost"
 
 .PHONY: stack-create-site
 stack-create-site:  ## Local Stack: Create a new site
 	@echo "Create a new site in the local Docker stack"
-	VOLTO_VERSION=$(VOLTO_VERSION) PLONE_VERSION=$(PLONE_VERSION) docker compose -f docker-compose.yml exec backend ./docker-entrypoint.sh create-site
+	$(DOCKER_COMPOSE) -f docker-compose.yml exec backend ./docker-entrypoint.sh create-site
 
 .PHONY: stack-status
 stack-status:  ## Local Stack: Check Status
 	@echo "Check the status of the local Docker stack"
-	@docker compose -f docker-compose.yml ps
+	$(DOCKER_COMPOSE) -f docker-compose.yml ps
 
 .PHONY: stack-stop
 stack-stop:  ##  Local Stack: Stop Services
 	@echo "Stop local Docker stack"
-	@docker compose -f docker-compose.yml stop
+	$(DOCKER_COMPOSE) -f docker-compose.yml stop
 
 .PHONY: stack-rm
 stack-rm:  ## Local Stack: Remove Services and Volumes
 	@echo "Remove local Docker stack"
-	@docker compose -f docker-compose.yml down
+	$(DOCKER_COMPOSE) -f docker-compose.yml down
 	@echo "Remove local volume data"
 	@docker volume rm $(PROJECT_NAME)_vol-site-data
 
