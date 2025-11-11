@@ -7,6 +7,29 @@
 -->
 
 <!-- towncrier release notes start -->
+## 2.0.0 (2025-11-11)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+No significant changes.
+
+
+### Project
+
+
+#### Internal
+
+- Update repository.toml and the root Makefile. @ericof 
+
+
+
 ## 2.0.0a10 (2025-10-03)
 
 ### Backend
