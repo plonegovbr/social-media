@@ -76,7 +76,7 @@ jobs:
         run: |
           REPOSITORY_SETTINGS="$(uvx repoplone settings dump)"
           echo "image-name-prefix=$(jq -r '.container_images_prefix' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
-          echo "kc-version=$(jq -r '.backend.base_package_version' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
+          echo "plone-version=$(jq -r '.backend.base_package_version' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
           echo "volto-version=$(jq -r '.frontend.volto_version' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
           echo "base-tag=sha-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
