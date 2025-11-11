@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG VOLTO_VERSION
+ARG VOLTO_VERSION=19.0.0-alpha.12
 FROM plone/frontend-builder:${VOLTO_VERSION} AS builder
 
 COPY --chown=node packages/volto-social-media /app/packages/volto-social-media
