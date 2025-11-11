@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG VOLTO_VERSION
+ARG VOLTO_VERSION=19.0.0-alpha.12
 FROM plone/frontend-builder:${VOLTO_VERSION} AS builder
 
 COPY --chown=node packages/volto-social-media /app/packages/volto-social-media
@@ -15,7 +15,7 @@ RUN --mount=type=cache,id=pnpm,target=/app/.pnpm-store,uid=1000 <<EOT
     pnpm dlx mrs-developer missdev --no-config --fetch-https
     pnpm install && pnpm build:deps
     pnpm build
-    pnpm install --prod
+    CI=1 pnpm install --prod
 EOT
 
 FROM plone/frontend-prod-config:${VOLTO_VERSION}
