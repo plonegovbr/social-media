@@ -8,6 +8,17 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0-alpha.0 (2025-11-11)
+
+### Breaking
+
+- Support for @plone/volto 19.x. @ericof [#15](https://github.com/plonegovbr/social-media/issue/15)
+
+### Internal
+
+- Refactor Makefile to use repoplone to get its configuration. @ericof 
+- Test with @kitconcept/volto-light-theme 8.x. @ericof 
+
 ## 2.0.0 (2025-11-11)
 
 ## 2.0.0-alpha.10 (2025-10-03)

@@ -7,6 +7,41 @@
 -->
 
 <!-- towncrier release notes start -->
+## 3.0.0a0 (2025-11-11)
+
+### Backend
+
+
+#### Internal:
+
+- Refactor Makefile to use repoplone to get its configuration. @ericof 
+
+
+
+### Frontend
+
+#### Breaking
+
+- Support for @plone/volto 19.x. @ericof [#15](https://github.com/plonegovbr/social-media/issue/15)
+
+#### Internal
+
+- Refactor Makefile to use repoplone to get its configuration. @ericof 
+- Test with @kitconcept/volto-light-theme 8.x. @ericof 
+
+
+
+### Project
+
+
+#### Internal
+
+- Refactor config.yml to use repoplone. @ericof [#14](https://github.com/plonegovbr/social-media/pull/14)
+- Update .vscode recommended extensions and default settings. @ericof [#17](https://github.com/plonegovbr/social-media/pull/17)
+- Update GHA versions . @ericof 
+
+
+
 ## 2.0.0 (2025-11-11)
 
 ### Backend

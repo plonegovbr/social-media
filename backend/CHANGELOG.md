@@ -9,6 +9,13 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0a0 (2025-11-11)
+
+
+### Internal:
+
+- Refactor Makefile to use repoplone to get its configuration. @ericof 
+
 ## 2.0.0 (2025-11-11)
 
 No significant changes.
