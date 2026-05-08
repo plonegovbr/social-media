@@ -1,0 +1,1 @@
+The default title when addind a new link is the name of the SocialNetWork + Added a Icon next to title of the network. @humanaice

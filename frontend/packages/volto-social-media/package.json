@@ -27,7 +27,12 @@
     "release-alpha": "release-it --preRelease=alpha"
   },
   "dependencies": {
-    "@plone/components": "workspace:*"
+    "@plone/components": "workspace:*",
+    "react-aria-components": "^1.4.1",
+    "classnames": "^2.5.1",
+    "uuid": "^10.0.0",
+    "react-animate-height": "^3.0.4",
+    "lodash": "^4.17.21"
   },
   "peerDependencies": {
     "react": "18.2.0",
