@@ -49,69 +49,20 @@ export type ObjectListWidgetSchema =
   | ((props: ObjectListWidgetProps) => JSONSchema & { addMessage: string });
 
 export type ObjectListWidgetProps = {
-  /**
-   * The ID of the widget.
-   */
   id: string;
-  /**
-   * The ID of the block this widget belongs to.
-   */
   block: string;
-  /**
-   * The fieldset this widget belongs to.
-   */
   fieldSet: string;
-  /**
-   * The title of the widget.
-   */
   title: string;
-  /**
-   * The current value of the widget, which is BlocksData.
-   */
   value?: Array<Record<string, any>>;
-  /**
-   * The default value for the widget. Can be a string or an object.
-   */
   default?: string | object;
-  /**
-   * Whether the widget is required.
-   */
   required?: boolean;
-  /**
-   * The value to use when the widget is missing a value.
-   */
   missing_value?: unknown;
-  /**
-   * The CSS class name for the widget.
-   */
   className?: string;
-  /**
-   * A callback function that is called when the value of the widget changes.
-   * @param id The ID of the widget.
-   * @param value The new value of the widget.
-   */
   onChange: (id: string, value: any) => void;
-  /**
-   * The index of the currently active object.
-   */
   activeObject: number;
-  /**
-   * A callback function that is called to set the active object.
-   * @param index The index of the object to set as active.
-   */
   setActiveObject: (index: number) => void;
-  /**
-   * The schema for the ObjectListWidget.
-   */
   schema?: ObjectListWidgetSchema;
-  /**
-   * The name of the schema.
-   */
   schemaName?: string | undefined;
-  /**
-   * An optional function to enhance the schema.
-   * @param args An object containing the schema, form data, intl, navRoot, and contentType.
-   */
   schemaEnhancer?: (args: {
     schema: JSONSchema & { addMessage: string };
     formData: BlockConfigBase;
@@ -133,7 +84,9 @@ const EMPTY_SCHEMA = {
   required: [],
 };
 
-const ObjectListWidget = (props: ObjectListWidgetProps): React.ReactElement => {
+const SocialMediaObjectList = (
+  props: ObjectListWidgetProps,
+): React.ReactElement => {
   const {
     block,
     fieldSet,
@@ -221,7 +174,6 @@ const ObjectListWidget = (props: ObjectListWidgetProps): React.ReactElement => {
             }}
           >
             <Icon name={addSVG} size="18px" />
-            {/* Custom addMessage in schema, else default to English */}
             <Text>
               {objectSchema.addMessage ||
                 `${intl.formatMessage(messages.add)} ${objectSchema.title}`}
@@ -280,30 +232,42 @@ const ObjectListWidget = (props: ObjectListWidgetProps): React.ReactElement => {
                   </div>
 
                   <div className="olw-item-title">
-                    {item.id &&
-                      (() => {
+                    {(() => {
+                      let networkIcon = null;
+                      let networkTitle = null;
+                      if (item.id) {
                         try {
                           const networkUtility = config.getUtility({
                             type: 'socialNetwork',
                             name: item.id,
                           });
                           if (networkUtility.method) {
-                            const networkIcon = networkUtility.method().icon;
-                            return (
-                              <Icon
-                                name={networkIcon}
-                                size="18px"
-                                style={{ marginRight: '8px' }}
-                              />
-                            );
+                            const info = networkUtility.method();
+                            networkIcon = info.icon;
+                            networkTitle = info.title;
                           }
                         } catch (e) {
-                          // Network not found, skip icon
+                          // Network not found, skip
                         }
-                        return null;
-                      })()}
-                    {item.title ||
-                      `${objectSchema.title} #${index !== undefined ? index + 1 : ''}`}
+                      }
+
+                      return (
+                        <>
+                          {networkIcon && (
+                            <Icon
+                              name={networkIcon}
+                              size="18px"
+                              style={{ marginRight: '8px' }}
+                            />
+                          )}
+                          {item.title ||
+                            networkTitle ||
+                            `${objectSchema.title} #${
+                              index !== undefined ? index + 1 : ''
+                            }`}
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="olw-tools">
                     <div
@@ -376,4 +340,4 @@ const ObjectListWidget = (props: ObjectListWidgetProps): React.ReactElement => {
   );
 };
 
-export default ObjectListWidget;
+export default SocialMediaObjectList;
