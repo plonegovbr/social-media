@@ -22,7 +22,7 @@ class ISocialLinks(model.Schema):
     directives.widget(
         "social_links",
         frontendOptions={
-            "widget": "object_list",
+            "widget": "social_media_object_list",
             "widgetProps": {"schemaName": "socialMedia"},
         },
     )

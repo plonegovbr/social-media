@@ -53,7 +53,7 @@ export const followUsSchema = (props) => {
       },
       allowedNetworks: {
         title: intl.formatMessage(messages.FollowUsNetworks),
-        widget: 'object_list',
+        widget: 'social_media_object_list',
         schema: NetworkSchema({ intl, allowedNetworks }),
         default: [],
       },

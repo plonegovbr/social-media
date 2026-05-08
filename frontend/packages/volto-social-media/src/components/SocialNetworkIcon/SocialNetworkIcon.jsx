@@ -5,20 +5,24 @@ import cx from 'classnames';
 
 const SocialNetworkIcon = (props) => {
   const { id, size, color, className, title, onClick, animate } = props;
+
   const networkUtility = config.getUtility({
     type: 'socialNetwork',
     name: id,
   });
+
   const networkIcon = networkUtility.method().icon;
+
   return (
     <Icon
       name={networkIcon}
       size={size || '47px'}
       color={color}
-      className={cx(`${className}`, 'social-network', `${id}`, {
+      className={cx(className, 'social-network', id, {
         animate: animate,
       })}
-      title={title}
+      aria-label={title}
+      aria-hidden={!title}
       onClick={onClick}
     />
   );
