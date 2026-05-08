@@ -24,7 +24,6 @@ class ISocialLinks(model.Schema):
         frontendOptions={
             "widget": "social_media_object_list",
             "widgetProps": {"schemaName": "socialMedia"},
-
         },
     )
     social_links = JSONField(
