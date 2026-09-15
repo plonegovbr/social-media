@@ -13,13 +13,16 @@ GIT_FOLDER=$(CURRENT_DIR)/.git
 
 REPOSITORY_SETTINGS := $(shell uvx repoplone settings dump)
 
-PROJECT_NAME := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.name')
+PROJECT_NAME=$(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.name')
+STACK_NAME=${PROJECT_NAME}
 
-VOLTO_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.volto_version')
-PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
+IMAGE_NAME_PREFIX := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.container_images_prefix')
+IMAGE_NAME_SEPARATOR := -
+IMAGE_NAME_PREFIX_WITH_SEPARATOR := $(IMAGE_NAME_PREFIX)$(IMAGE_NAME_SEPARATOR)
 
-STACK_FILE := docker-compose-dev.yml
-DOCKER_COMPOSE := VOLTO_VERSION=$(VOLTO_VERSION) PLONE_VERSION=$(PLONE_VERSION) docker compose
+# Environment variables to be exported
+export VOLTO_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.volto_version')
+export PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
 
 # We like colors
 # From: https://coderwall.com/p/izxssa/colored-makefile-for-golang-projects
@@ -44,6 +47,8 @@ debug-settings:  ## Debug settings
 	@echo "PROJECT_NAME: $(PROJECT_NAME)"
 	@echo "VOLTO_VERSION: $(VOLTO_VERSION)"
 	@echo "PLONE_VERSION: $(PLONE_VERSION)"
+	@echo "IMAGE_NAME_PREFIX: $(IMAGE_NAME_PREFIX)"
+	@echo "IMAGE_NAME_PREFIX_WITH_SEPARATOR: $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)"
 
 ###########################################
 # Frontend
@@ -120,7 +125,7 @@ format:  ## Format codebase
 
 .PHONY: lint
 lint:  ## Format codebase
-	@echo "Lint the codebasecodebase"
+	@echo "Lint the codebase"
 	$(MAKE) -C "./backend/" lint
 	$(MAKE) -C "./frontend/" lint
 
@@ -154,39 +159,40 @@ build-images:  ## Build container images
 ###########################################
 # Local Stack
 ###########################################
-.PHONY: stack-start
-stack-start:  ## Local Stack: Start Services
-	@echo "Start local Docker stack"
-	$(DOCKER_COMPOSE) -f docker-compose.yml up -d --build
-	@echo "Now visit: http://social-media.localhost"
-
 .PHONY: stack-create-site
 stack-create-site:  ## Local Stack: Create a new site
 	@echo "Create a new site in the local Docker stack"
-	$(DOCKER_COMPOSE) -f docker-compose.yml exec backend ./docker-entrypoint.sh create-site
+	@echo "(Stack must not be running already.)"
+	@docker compose -f docker-compose.yml run --build backend ./docker-entrypoint.sh create-site
+
+.PHONY: stack-start
+stack-start:  ## Local Stack: Start Services
+	@echo "Start local Docker stack"
+	@docker compose -f docker-compose.yml up -d --build
+	@echo "Now visit: http://$(PROJECT_NAME).localhost"
 
 .PHONY: stack-status
 stack-status:  ## Local Stack: Check Status
 	@echo "Check the status of the local Docker stack"
-	$(DOCKER_COMPOSE) -f docker-compose.yml ps
+	@docker compose -f docker-compose.yml ps
 
 .PHONY: stack-stop
 stack-stop:  ##  Local Stack: Stop Services
 	@echo "Stop local Docker stack"
-	$(DOCKER_COMPOSE) -f docker-compose.yml stop
+	@docker compose -f docker-compose.yml stop
 
 .PHONY: stack-rm
 stack-rm:  ## Local Stack: Remove Services and Volumes
 	@echo "Remove local Docker stack"
-	$(DOCKER_COMPOSE) -f docker-compose.yml down
+	@docker compose -f docker-compose.yml down
 	@echo "Remove local volume data"
 	@docker volume rm $(PROJECT_NAME)_vol-site-data
 
 ###########################################
 # Acceptance
 ###########################################
-.PHONY: acceptance-backend-dev-start
-acceptance-backend-dev-start:
+.PHONY: acceptance-backend-start
+acceptance-backend-start:
 	@echo "Start acceptance backend"
 	$(MAKE) -C "./backend/" acceptance-backend-start
 
@@ -204,12 +210,12 @@ acceptance-test:
 .PHONY: acceptance-frontend-image-build
 acceptance-frontend-image-build:
 	@echo "Build acceptance frontend image"
-	@docker build frontend -t plonegovbr/social-media-frontend:acceptance -f frontend/Dockerfile --build-arg VOLTO_VERSION=$(VOLTO_VERSION)
+	@docker build frontend -t $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend:acceptance -f frontend/Dockerfile --build-arg VOLTO_VERSION=$(VOLTO_VERSION)
 
 .PHONY: acceptance-backend-image-build
 acceptance-backend-image-build:
 	@echo "Build acceptance backend image"
-	@docker build backend -t plonegovbr/social-media-backend:acceptance -f backend/Dockerfile.acceptance --build-arg PLONE_VERSION=$(PLONE_VERSION)
+	@docker build backend -t $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend:acceptance -f backend/Dockerfile.acceptance --build-arg PLONE_VERSION=$(PLONE_VERSION)
 
 .PHONY: acceptance-images-build
 acceptance-images-build: ## Build Acceptance frontend/backend images
@@ -219,12 +225,12 @@ acceptance-images-build: ## Build Acceptance frontend/backend images
 .PHONY: acceptance-frontend-container-start
 acceptance-frontend-container-start:
 	@echo "Start acceptance frontend"
-	@docker run --rm -p 3000:3000 --name social-media-frontend-acceptance --link social-media-backend-acceptance:backend -e RAZZLE_API_PATH=http://localhost:55001/plone -e RAZZLE_INTERNAL_API_PATH=http://backend:55001/plone -d plonegovbr/social-media-frontend:acceptance
+	@docker run --rm -p 3000:3000 --name $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend-acceptance --link $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance:backend -e RAZZLE_API_PATH=http://localhost:55001/plone -e RAZZLE_INTERNAL_API_PATH=http://backend:55001/plone -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend:acceptance
 
 .PHONY: acceptance-backend-container-start
 acceptance-backend-container-start:
 	@echo "Start acceptance backend"
-	@docker run --rm -p 55001:55001 --name social-media-backend-acceptance -d plonegovbr/social-media-backend:acceptance
+	@docker run --rm -p 55001:55001 --name $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend:acceptance
 
 .PHONY: acceptance-containers-start
 acceptance-containers-start: ## Start Acceptance containers
@@ -234,8 +240,8 @@ acceptance-containers-start: ## Start Acceptance containers
 .PHONY: acceptance-containers-stop
 acceptance-containers-stop: ## Stop Acceptance containers
 	@echo "Stop acceptance containers"
-	@docker stop social-media-frontend-acceptance
-	@docker stop social-media-backend-acceptance
+	@docker stop $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend-acceptance
+	@docker stop $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance
 
 .PHONY: ci-acceptance-test
 ci-acceptance-test:

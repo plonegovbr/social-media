@@ -2,6 +2,7 @@
 name = "social-media"
 changelog = "CHANGELOG.md"
 version = "version.txt"
+version_format = "semver"
 container_images_prefix = "ghcr.io/plonegovbr/social-media"
 compose = ["docker-compose.yml"]
 

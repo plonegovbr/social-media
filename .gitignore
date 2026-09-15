@@ -5,3 +5,6 @@ node_modules
 *.mo
 
 frontend/packages/volto-light-theme/
+
+# Local, machine-specific Claude Code notes
+.claude/*.local.*
