@@ -4,11 +4,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-09-16 03:45+0000\n"
+"POT-Creation-Date: 2026-09-15 02:55+0000\n"
 "PO-Revision-Date: 2025-09-27 23:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,6 +16,7 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonegovbr.socialmedia\n"
+"Language: eu\n"
 "X-Generator: Poedit 3.4.2\n"
 
 #: plonegovbr/socialmedia/behaviors/configure.zcml:28
@@ -31,15 +31,15 @@ msgstr "Konfiguratu sare sozialen ezarpenak elementu-mota bati."
 msgid "Create example content to showcase the new add-on"
 msgstr "Adibide-edukia sortu"
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:50
+#: plonegovbr/socialmedia/behaviors/social_media.py:51
 msgid "Facebook App ID"
 msgstr "Facebook App Id"
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:57
+#: plonegovbr/socialmedia/behaviors/social_media.py:58
 msgid "Facebook username"
 msgstr "Facebook erabiltzaile-izena"
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:35
+#: plonegovbr/socialmedia/behaviors/social_media.py:36
 msgid "Include meta tags on pages to give hints to social media on how to better render your pages when shared"
 msgstr "Sare sozialetan zure edukia txukun agertzeko meta etiketak gehitu"
 
@@ -47,17 +47,17 @@ msgstr "Sare sozialetan zure edukia txukun agertzeko meta etiketak gehitu"
 msgid "Package to configure a new Social Media support for Plone site"
 msgstr "Plone atari baten sare sozialen konfigurazioa gehitzeko paketea"
 
-#: plonegovbr/socialmedia/behaviors/social_links.py:30
-#: plonegovbr/socialmedia/behaviors/social_media.py:69
+#: plonegovbr/socialmedia/behaviors/social_links.py:31
+#: plonegovbr/socialmedia/behaviors/social_media.py:70
 msgid "Profiles"
 msgstr "Profilak"
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:34
+#: plonegovbr/socialmedia/behaviors/social_media.py:35
 msgid "Share social data"
 msgstr "Partekatu datu sozialak"
 
-#: plonegovbr/socialmedia/behaviors/social_links.py:16
-#: plonegovbr/socialmedia/behaviors/social_media.py:25
+#: plonegovbr/socialmedia/behaviors/social_links.py:17
+#: plonegovbr/socialmedia/behaviors/social_media.py:26
 msgid "Social Media"
 msgstr "Sare sozialak"
 
@@ -81,7 +81,7 @@ msgstr "Sare sozialak: estekak"
 msgid "Social Media: Settings"
 msgstr "Sare sozialak: ezarpenak"
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:51
+#: plonegovbr/socialmedia/behaviors/social_media.py:52
 msgid "To be used with some integrations like Open Graph data"
 msgstr "Open Graph datuekin erabiltzeko"
 
@@ -89,6 +89,6 @@ msgstr "Open Graph datuekin erabiltzeko"
 msgid "Uninstall Social Media support for Plone setup."
 msgstr "Desintalatu Sare Sozialen ezarpenak."
 
-#: plonegovbr/socialmedia/behaviors/social_media.py:45
+#: plonegovbr/socialmedia/behaviors/social_media.py:46
 msgid "X username"
 msgstr "X webguneko erabiltzaile-izena"
