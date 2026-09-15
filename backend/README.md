@@ -64,7 +64,7 @@ The pages closest to this package:
 
 ## Installation
 
-Requires Plone 6.1 or 6.2, and Python 3.10 or later.
+Requires Plone 6.1 or 6.2, and Python 3.11 or later.
 
 Install plonegovbr.socialmedia with uv.
 

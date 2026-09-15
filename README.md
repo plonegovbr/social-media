@@ -54,7 +54,7 @@ Both packages are installed separately, and a site needs both: the backend store
 
 ### Backend
 
-Requires Plone 6.1 or 6.2, and Python 3.10 or later.
+Requires Plone 6.1 or 6.2, and Python 3.11 or later.
 
 ```shell
 uv add plonegovbr.socialmedia

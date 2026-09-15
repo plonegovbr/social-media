@@ -28,10 +28,10 @@ Read the changelog before upgrading.
 
 The backend test suite runs for every combination below, against the latest release of each Plone series.
 
-| Plone | Python 3.10 | Python 3.11 | Python 3.12 | Python 3.13 | Python 3.14 |
-|---|---|---|---|---|---|
-| 6.2 | Tested | Tested | Tested | Tested | Tested |
-| 6.1 | Tested | Tested | Tested | Tested | Tested |
+| Plone | Python 3.11 | Python 3.12 | Python 3.13 | Python 3.14 |
+|---|---|---|---|---|
+| 6.2 | Tested | Tested | Tested | Tested |
+| 6.1 | Tested | Tested | Tested | Tested |
 
 The matrix is defined in [`.github/workflows/backend.yml`](https://github.com/plonegovbr/social-media/blob/main/.github/workflows/backend.yml).
 The package's metadata declares `Framework :: Plone :: 6.1` and `Framework :: Plone :: 6.2`.

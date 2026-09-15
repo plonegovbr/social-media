@@ -100,7 +100,7 @@ A footer slot, a Follow Us block, a view widget, and components to render the li
 | | |
 |---|---|
 | Plone | 6.1 or 6.2 |
-| Python | 3.10 to 3.14 |
+| Python | 3.11 to 3.14 |
 | Frontend | Volto, developed against 19.4.1 |
 
 ```{toctree}

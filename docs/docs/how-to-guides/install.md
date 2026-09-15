@@ -16,7 +16,7 @@ This guide shows you how to add `plonegovbr.socialmedia` to a Plone project, and
 ## Prerequisites
 
 -   A Plone 6.1 or 6.2 project.
--   Python 3.10 or later.
+-   Python 3.11 or later.
 -   A Volto frontend, to edit and show the settings.
 
 ## Add the package
