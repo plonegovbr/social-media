@@ -1,25 +1,36 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16T03:45:43.341Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
-"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language: eu\n"
-"MIME-Version: 1.0\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 "X-Generator: Poedit 3.4.2\n"
 
+#. Default: "Actions"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Actions"
+msgstr ""
+
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add social media profile"
 msgstr "Gehitu sare sozialetako profila"
+
+#. Default: "Add {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Add {item}"
+msgstr ""
 
 #. Default: "Align"
 #: messages
@@ -30,6 +41,27 @@ msgstr "Alineazioa"
 #: messages
 msgid "Animate Icon"
 msgstr "Ikono animatua"
+
+#. Default: "Cancel"
+#: components/ConfirmModal/ConfirmModal
+msgid "Cancel"
+msgstr ""
+
+#. Default: "Delete"
+#: components/ConfirmModal/ConfirmModal
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Delete"
+msgstr ""
+
+#. Default: "Edit"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit"
+msgstr ""
+
+#. Default: "Edit {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit {item}"
+msgstr ""
 
 #. Default: "Follow Us"
 #: components/Blocks/FollowUs/Data
@@ -51,8 +83,14 @@ msgstr "Goiburukoa"
 msgid "Link"
 msgstr "Esteka"
 
+#. Default: "Move {title}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Move {title}"
+msgstr ""
+
 #. Default: "Network"
-#: components/Widgets/schema/socialMediaSchema messages
+#: components/Widgets/schema/socialMediaSchema
+#: messages
 msgid "Network"
 msgstr "Sarea"
 
@@ -66,6 +104,11 @@ msgstr "Sareak"
 msgid "Open in a new tab"
 msgstr "Ireki fitxa berrian"
 
+#. Default: "Order"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Order"
+msgstr ""
+
 #. Default: "Target"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Target"
@@ -75,3 +118,13 @@ msgstr "Helburua"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Title"
 msgstr "Izenburua"
+
+#. Default: "Remove this entry from the list? It is gone once the form is saved."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-confirm-delete"
+msgstr ""
+
+#. Default: "Nothing has been added yet."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-empty"
+msgstr ""

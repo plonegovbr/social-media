@@ -1,23 +1,46 @@
 ---
 myst:
   html_meta:
-    "description": "Social Media support for Plone Reference"
-    "property=og:description": "Social Media support for Plone Reference"
-    "property=og:title": "Social Media support for Plone Reference"
-    "keywords": "Plone, _Social Media support for Plone,_ reference"
+    "description": "Behaviors, REST API, profiles, the Volto add-on, and compatibility of Social Media support for Plone."
+    "property=og:description": "Behaviors, REST API, profiles, the Volto add-on, and compatibility of Social Media support for Plone."
+    "property=og:title": "Reference"
+    "keywords": "Plone, plonegovbr.socialmedia, volto-social-media, reference, behaviors, REST API, Volto"
 ---
+
+(reference-index)=
 
 # Reference
 
-This part of the documentation contains reference material, including APIs, configuration values, and environment variables.
+Reference guides are technical descriptions of the machinery and how to operate it.
 
-> Reference guides are technical descriptions of the machinery and how to operate it.
-> Reference material is information-oriented.
+Look things up here.
+For directions toward a result, read {doc}`/how-to-guides/index`.
+For the reasoning behind any of it, read {doc}`/concepts/index`.
 
-```{seealso}
-https://diataxis.fr/reference/
+## Backend
+
+```{toctree}
+:maxdepth: 1
+
+behaviors
+catalog
+rest-api
+python
+profiles
 ```
 
-## Configuration
+## Frontend
 
--   {doc}`plone:contributing/documentation/themes-and-extensions`
+```{toctree}
+:maxdepth: 1
+
+frontend
+```
+
+## Support
+
+```{toctree}
+:maxdepth: 1
+
+compatibility
+```

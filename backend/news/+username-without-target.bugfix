@@ -1,0 +1,1 @@
+Compute the X and Facebook usernames from the first link to the network that has a target, instead of failing on a link without one. @ericof

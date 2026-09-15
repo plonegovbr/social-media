@@ -3,6 +3,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import DexterityContent
 from plone.schema import JSONField
 from plone.supermodel import model
+from plone.supermodel.directives import fieldset
 from plonegovbr.socialmedia import _
 from plonegovbr.socialmedia import utils
 from plonegovbr.socialmedia.behaviors import base
@@ -20,7 +21,7 @@ class ISocialMedia(Interface):
 class ISocialMediaSettings(model.Schema):
     """Site/Subsite social media settings."""
 
-    model.fieldset(
+    fieldset(
         "social_media",
         label=_("Social Media"),
         fields=[

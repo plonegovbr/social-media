@@ -1,30 +1,59 @@
 ---
 myst:
   html_meta:
-    "description": "Social Media support for Plone how-to guides"
-    "property=og:description": "Social Media support for Plone how-to guides"
-    "property=og:title": "Social Media support for Plone how-to guides"
-    "keywords": "Plone, Social Media support for Plone, how-to, guides"
+    "description": "Task-oriented directions for installing, using, and customizing Social Media support for Plone."
+    "property=og:description": "Task-oriented directions for installing, using, and customizing Social Media support for Plone."
+    "property=og:title": "How-to guides"
+    "keywords": "Plone, plonegovbr.socialmedia, volto-social-media, how-to, install, configure, troubleshoot"
 ---
+
+(howto-index)=
 
 # How-to guides
 
-This part of the documentation contains how-to guides, including installation and usage.
+How-to guides are directions that guide you through a problem or toward a result.
 
-> How-to guides are directions that guide the reader through a problem or towards a result.
-> How-to guides are goal-oriented.
+Each guide assumes you already know what you want.
+To understand why something works the way it does, read {doc}`/concepts/index` instead.
 
-```{seealso}
-https://diataxis.fr/how-to-guides/
+## Getting a site running
+
+Do these two in order.
+
+```{toctree}
+:maxdepth: 1
+
+install
+install-the-frontend
+upgrade
 ```
 
+## Managing links
 
-## Authors
+```{toctree}
+:maxdepth: 1
 
--   {doc}`plone:contributing/documentation/myst-reference`
--   {doc}`plone:contributing/documentation/authors`
+set-the-site-links
+give-a-section-its-own-links
+add-links-to-a-content-type
+add-a-link-from-python
+add-a-follow-us-block
+```
 
+## Customizing the frontend
 
-## Designers
+```{toctree}
+:maxdepth: 1
 
--   [Contribute to Plone Sphinx Theme](https://plone-sphinx-theme.readthedocs.io/guides/contribute.html)
+show-links-in-the-footer
+configure-networks
+style-the-icons
+```
+
+## When something is wrong
+
+```{toctree}
+:maxdepth: 1
+
+troubleshoot
+```

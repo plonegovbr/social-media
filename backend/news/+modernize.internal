@@ -1,0 +1,1 @@
+Use pytest-plone 1.1.0, type check with mypy and plone-stubs, and align the backend tooling with the cookieplone templates. @ericof

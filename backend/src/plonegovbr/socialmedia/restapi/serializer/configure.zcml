@@ -1,0 +1,9 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- Adds the social_links metadata column to every summary. -->
+  <utility
+      factory=".summary.JSONSummarySerializerMetadata"
+      name="plonegovbr.socialmedia.summary_serializer_metadata"
+      />
+
+</configure>

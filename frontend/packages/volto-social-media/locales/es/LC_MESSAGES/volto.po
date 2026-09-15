@@ -5,12 +5,12 @@ msgstr ""
 "POT-Creation-Date: 2023-05-09 11:45-0400\n"
 "PO-Revision-Date: 2025-09-27 23:14+0200\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
-"Language-Team: ES <LL@li.org>\n"
 "Language: es\n"
-"MIME-Version: 1.0\n"
+"Language-Team: ES <LL@li.org>\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
 "Preferred-Encodings: utf-8\n"
 "Language-Code: es\n"
 "Language-Name: Español\n"
@@ -18,10 +18,20 @@ msgstr ""
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 "X-Generator: Poedit 3.4.2\n"
 
+#. Default: "Actions"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Actions"
+msgstr "Acciones"
+
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add social media profile"
 msgstr "Añadir perfil de redes sociales"
+
+#. Default: "Add {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Add {item}"
+msgstr "Añadir {item}"
 
 #. Default: "Align"
 #: messages
@@ -32,6 +42,27 @@ msgstr "Alineación"
 #: messages
 msgid "Animate Icon"
 msgstr "Animar icono"
+
+#. Default: "Cancel"
+#: components/ConfirmModal/ConfirmModal
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. Default: "Delete"
+#: components/ConfirmModal/ConfirmModal
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Delete"
+msgstr "Eliminar"
+
+#. Default: "Edit"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit"
+msgstr "Editar"
+
+#. Default: "Edit {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit {item}"
+msgstr "Editar {item}"
 
 #. Default: "Follow Us"
 #: components/Blocks/FollowUs/Data
@@ -53,8 +84,14 @@ msgstr "Encabezamiento"
 msgid "Link"
 msgstr "Enlace"
 
+#. Default: "Move {title}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Move {title}"
+msgstr "Mover {title}"
+
 #. Default: "Network"
-#: components/Widgets/schema/socialMediaSchema messages
+#: components/Widgets/schema/socialMediaSchema
+#: messages
 msgid "Network"
 msgstr "Red"
 
@@ -68,6 +105,11 @@ msgstr "Redes"
 msgid "Open in a new tab"
 msgstr "Abrir en nueva pestaña"
 
+#. Default: "Order"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Order"
+msgstr "Orden"
+
 #. Default: "Target"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Target"
@@ -77,3 +119,13 @@ msgstr "Destino"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Title"
 msgstr "Título"
+
+#. Default: "Remove this entry from the list? It is gone once the form is saved."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-confirm-delete"
+msgstr "¿Eliminar esta entrada de la lista? Se va una vez que se guarde el formulario."
+
+#. Default: "Nothing has been added yet."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-empty"
+msgstr "Nada ha sido agregado aún."

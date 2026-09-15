@@ -1,6 +1,9 @@
 from pathlib import Path
 from plone import api
-from plone.exportimport import importers
+
+# attr-defined: plone-stubs ships no stubs for plone.exportimport, so mypy
+# cannot see this submodule. The import resolves fine at runtime.
+from plone.exportimport import importers  # type: ignore[attr-defined]
 from plonegovbr.socialmedia import logger
 from Products.GenericSetup.tool import SetupTool
 

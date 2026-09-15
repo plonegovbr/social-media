@@ -6,11 +6,11 @@ on:
       node-version:
         required: false
         type: string
-        default: "22.x"
+        default: "24.x"
       python-version:
         required: false
         type: string
-        default: "3.12"
+        default: "3.14"
     outputs:
       acceptance:
         description: "Flag reporting if we should run the acceptance jobs"
@@ -24,6 +24,9 @@ on:
       docs:
         description: "Flag reporting if we should run the docs jobs"
         value: ${{ jobs.config.outputs.docs }}
+      deploy-docs:
+        description: "Flag reporting if we should deploy the docs and Storybook"
+        value: ${{ jobs.config.outputs.deploy-docs }}
       frontend:
         description: "Flag reporting if we should run the frontend jobs"
         value: ${{ jobs.config.outputs.frontend }}
@@ -45,6 +48,27 @@ on:
       volto-version:
         description: "Volto version to be used"
         value: ${{ jobs.config.outputs.volto-version }}
+      path-backend:
+        description: "Path to the backend package"
+        value: ${{ jobs.config.outputs.path-backend }}
+      path-frontend:
+        description: "Path to the frontend package"
+        value: ${{ jobs.config.outputs.path-frontend }}
+      path-root:
+        description: "Path to the root of the repository"
+        value: ${{ jobs.config.outputs.path-root }}
+      changelog-backend:
+        description: "Flag reporting if we should run changelog jobs for the backend"
+        value: ${{ jobs.config.outputs.changelog-backend }}
+      changelog-frontend:
+        description: "Flag reporting if we should run changelog jobs for the frontend"
+        value: ${{ jobs.config.outputs.changelog-frontend }}
+      changelog-repository:
+        description: "Flag reporting if we should run changelog jobs for the repository"
+        value: ${{ jobs.config.outputs.changelog-repository }}
+      storybook-deploy:
+        description: "Whether to deploy storybook or not"
+        value: ${{ jobs.config.outputs.storybook-deploy }}
 
 jobs:
   config:
@@ -54,15 +78,23 @@ jobs:
       backend: ${{ steps.filter.outputs.backend }}
       devops: ${{ steps.filter.outputs.devops }}
       docs: ${{ steps.filter.outputs.docs }}
+      deploy-docs: ${{ steps.filter.outputs.deploy-docs }}
       frontend: ${{ steps.filter.outputs.frontend }}
       base-tag: ${{ steps.vars.outputs.base-tag }}
-      image-name-prefix: ${{ steps.vars.outputs.image-name-prefix }}
       plone-version: ${{ steps.vars.outputs.plone-version }}
       volto-version: ${{ steps.vars.outputs.volto-version }}
+      image-name-prefix: ${{ steps.vars.outputs.image-name-prefix }}
+      storybook-deploy: ${{ steps.vars.outputs.storybook-deploy }}
+      changelog-backend: ${{ steps.filter.outputs.changelog-backend }}
+      changelog-frontend: ${{ steps.filter.outputs.changelog-frontend }}
+      changelog-repository: ${{ steps.filter.outputs.changelog-repository }}
+      path-backend: ${{ steps.vars.outputs.path-backend }}
+      path-frontend: ${{ steps.vars.outputs.path-frontend }}
+      path-root: ${{ steps.vars.outputs.path-root }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup uv
         uses: plone/meta/.github/actions/setup_uv@2.x
@@ -75,18 +107,24 @@ jobs:
         shell: bash
         run: |
           REPOSITORY_SETTINGS="$(uvx repoplone settings dump)"
+          # `repoplone` reports absolute paths, but the checks need them
+          # relative to the repository root.
+          ROOT="$(jq -r '.root_path' <<< "$REPOSITORY_SETTINGS")"
           echo "image-name-prefix=$(jq -r '.container_images_prefix' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
           echo "plone-version=$(jq -r '.backend.base_package_version' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
           echo "volto-version=$(jq -r '.frontend.volto_version' <<< "$REPOSITORY_SETTINGS")" >> "$GITHUB_OUTPUT"
           echo "base-tag=sha-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          echo "path-backend=$(jq -r '.backend.path' <<< "$REPOSITORY_SETTINGS" | sed "s|^${ROOT}/||")" >> "$GITHUB_OUTPUT"
+          echo "path-frontend=$(jq -r '.frontend.path' <<< "$REPOSITORY_SETTINGS" | sed "s|^${ROOT}/||")" >> "$GITHUB_OUTPUT"
+          echo "path-root=." >> "$GITHUB_OUTPUT"
+          echo "storybook-deploy=${{ github.event.repository.private == false }}" >> $GITHUB_OUTPUT
 
-      - uses: dorny/paths-filter@v3.0.2
+      - uses: dorny/paths-filter@v4.0.3
         id: filter
         with:
           filters: |
             acceptance:
-              - '.github/workflows/backend*'
-              - '.github/workflows/frontend*'
+              - '.github/workflows/*'
               - 'backend/**'
               - 'frontend/**'
             backend:
@@ -94,26 +132,65 @@ jobs:
               - '.github/workflows/backend*'
             devops:
               - 'devops/**'
+            # A strict superset of `deploy-docs`, and deliberately so: the
+            # deploy job downloads the artifact this build produces, from the
+            # same run. Any path that triggers the deploy but not the build
+            # leaves it with nothing to download and it fails there rather
+            # than being skipped. `backend/**` is here for a second reason —
+            # the Python API pages are autodoc over its docstrings and the
+            # REST examples are generated from its tests, so a backend change
+            # can break the docs build on its own.
             docs:
-              - '.readthedocs.yaml'
               - 'docs/**'
-              - '.github/workflows/docs.yaml'
+              - '.github/workflows/docs.yml'
+              - '.github/workflows/tmp-docs-*'
+              - 'backend/**'
+              - '.github/workflows/backend*'
+              - 'frontend/**'
+              - '.github/workflows/frontend*'
+              - '.github/workflows/tmp-frontend-*'
+            # Wider than `docs` on purpose: the published site is documentation
+            # *and* Storybook, deployed as one artifact. A frontend-only change
+            # still has to rebuild both, or the two halves drift apart.
+            deploy-docs:
+              - 'docs/**'
+              - '.github/workflows/docs.yml'
+              - '.github/workflows/tmp-docs-*'
+              - 'frontend/**'
+              - '.github/workflows/frontend.yml'
+              - '.github/workflows/tmp-frontend-*'
             frontend:
               - 'frontend/**'
               - '.github/workflows/frontend*'
+            changelog-backend:
+              - 'backend/**'
+            changelog-frontend:
+              - 'frontend/**'
+            changelog-repository:
+              - '.github/**'
+              - '.vscode/**'
+              - 'devops/**'
+              - 'docs/**'
+              - 'docker-compose.yml'
+              - 'README.md'
 
       - name: Test vars
         run: |
-          echo '# Config Settings' >> $GITHUB_STEP_SUMMARY
-          echo '| Variable | Value |' >> $GITHUB_STEP_SUMMARY
-          echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
-          echo "| base-tag | ${{ steps.vars.outputs.base-tag }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| plone-version | ${{ steps.vars.outputs.plone-version }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| volto-version | ${{ steps.vars.outputs.volto-version }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| image-name-prefix | ${{ steps.vars.outputs.image-name-prefix }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| event-name | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| acceptance | ${{ steps.filter.outputs.acceptance }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| backend | ${{ steps.filter.outputs.backend }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| devops | ${{ steps.filter.outputs.devops }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| docs | ${{ steps.filter.outputs.docs }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| frontend | ${{ steps.filter.outputs.frontend }} |" >> $GITHUB_STEP_SUMMARY
+          echo "base-tag: ${{ steps.vars.outputs.base-tag }}"
+          echo 'image-name-prefix: ${{ steps.vars.outputs.image-name-prefix }}'
+          echo 'plone-version: ${{ steps.vars.outputs.plone-version }}'
+          echo 'volto-version: ${{ steps.vars.outputs.volto-version }}'
+          echo 'path-backend: ${{ steps.vars.outputs.path-backend }}'
+          echo 'path-frontend: ${{ steps.vars.outputs.path-frontend }}'
+          echo 'path-root: ${{ steps.vars.outputs.path-root }}'
+          echo 'storybook-deploy: ${{ steps.vars.outputs.storybook-deploy }}'
+          echo 'event-name: ${{ github.event_name }}'
+          echo 'Paths - acceptance: ${{ steps.filter.outputs.acceptance }}'
+          echo 'Paths - backend: ${{ steps.filter.outputs.backend }}'
+          echo 'Paths - devops: ${{ steps.filter.outputs.devops }}'
+          echo 'Paths - docs: ${{ steps.filter.outputs.docs }}'
+          echo 'Paths - deploy-docs: ${{ steps.filter.outputs.deploy-docs }}'
+          echo 'Paths - frontend: ${{ steps.filter.outputs.frontend }}'
+          echo 'Paths - changelog-backend: ${{ steps.filter.outputs.changelog-backend }}'
+          echo 'Paths - changelog-frontend: ${{ steps.filter.outputs.changelog-frontend }}'
+          echo 'Paths - changelog-repository: ${{ steps.filter.outputs.changelog-repository }}'
