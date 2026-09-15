@@ -1,18 +1,11 @@
 ---
 myst:
   html_meta:
-    "description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
-    "property=og:description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
+    "description": "Terms and definitions used throughout the Social Media support for Plone documentation."
+    "property=og:description": "Terms and definitions used throughout the Social Media support for Plone documentation."
     "property=og:title": "Glossary"
-    "keywords": "Plone, documentation, glossary, term, definition"
+    "keywords": "Plone, plonegovbr.socialmedia, glossary, term, definition"
 ---
-
-This glossary provides example terms and definitions relevant to **Social Media support for Plone**.
-Social media components for Plone and Volto
-
-```{note}
-This is an example glossary demonstrating MyST Markdown’s `{glossary}` directive. You can adapt it for your project’s appendix by editing or replacing these entries with your own terms and definitions.
-```
 
 (glossary-label)=
 
@@ -21,37 +14,56 @@ This is an example glossary demonstrating MyST Markdown’s `{glossary}` directi
 ```{glossary}
 :sorted: true
 
-Plone
-    [Plone](https://plone.org/) is an open-source content management system that is used to create, edit, and manage digital content, like websites, intranets and custom solutions.
-    It comes with over 20 years of growth, optimisations, and refinements.
-    The result is a system trusted by governments, universities, businesses, and other organisations all over the world.
+social link
+    One entry of a `social_links` field: a {term}`network`, a title, and a target address.
+
+network
+    A social network or a kind of link, such as `mastodon` or `website`, that a {term}`social link` names by id.
+    The frontend describes each network with a `socialNetwork` {term}`utility` holding its title and icon.
+
+settings behavior
+    The `plonegovbr.socialmedia.settings` {term}`behavior`, holding the social media settings of a site or of a section.
+
+inherit expansion
+    A {term}`plone.restapi` expansion that serves a {term}`behavior`'s fields from the closest object providing it.
+    It is how every page of a site reads the site's social media settings.
+
+utility
+    A named object registered in Volto's configuration registry under a type.
+    This add-on registers utilities of the types `socialNetwork` and `schema`.
+
+slot
+    A named place in a Volto page where add-ons render components, such as a footer area.
+
+widget
+    The component Volto renders a field with.
+    An edit widget renders it in a form, and a view widget renders it on a page.
+
+behavior
+    A reusable, optional set of fields and features that can be enabled per content type in Plone.
 
 add-on
-    An add-on in Plone extends its functionality.
-    It is code that is released as a package to make it easier to install.
+    A package that extends Plone's functionality.
+    In Volto, an add-on is a JavaScript package; in Plone's backend, it is a Python package.
 
-    In Volto, an add-on is a JavaScript package.
+Plone
+    [Plone](https://plone.org/) is an open source content management system used to create, edit, and manage digital content, including websites, intranets, and custom solutions.
 
-    In Plone core, an add-on is a Python package.
+plone.restapi
+    The [REST API](https://6.docs.plone.org/plone.restapi/docs/source/index.html) Plone serves, and the package providing it.
 
-    -   [Plone core add-ons](https://github.com/collective/awesome-plone#readme)
-    -   [Volto add-ons](https://github.com/collective/awesome-volto#readme)
-    -   [Add-ons tagged with the trove classifier `Framework :: Plone` on PyPI](https://pypi.org/search/?c=Framework+%3A%3A+Plone)
+Volto
+    [Volto](https://6.docs.plone.org/volto/index.html) is Plone's React-based frontend.
 
-Plone Sphinx Theme
-plone-sphinx-theme
-    [Plone Sphinx Theme](https://plone-sphinx-theme.readthedocs.io/) is a Sphinx theme for [Plone 6 Documentation](https://6.docs.plone.org/), [Plone Conference Training](https://training.plone.org/), and documentation of various Plone packages.
-    This scaffold uses Plone Sphinx Theme.
+Volto Light Theme
+    [Volto Light Theme](https://github.com/kitconcept/volto-light-theme) is a Volto theme, and the one this repository's development site uses.
 
-Markedly Structured Text
+Storybook
+    [Storybook](https://storybook.js.org/) renders user interface components in isolation, each with the props it is given.
+
+Diátaxis
+    A [framework](https://diataxis.fr/) for structuring technical documentation around four needs: tutorials, how-to guides, reference, and explanation.
+
 MyST
-    [Markedly Structured Text (MyST)](https://myst-parser.readthedocs.io/en/latest/) is a rich and extensible flavor of Markdown, for authoring Plone Documentation.
-    The sample documentation in this scaffold is written in MyST.
-
-Sphinx
-    [Sphinx](https://www.sphinx-doc.org/en/master/) is a tool that makes it easy to create intelligent and beautiful documentation.
-    It was originally created for Python documentation, and it has excellent facilities for the documentation of software projects in a range of languages.
-    It can generate multiple output formats, including HTML and PDF, from a single source.
-    This scaffold uses Sphinx to generate documentation in HTML format.
-
+    [Markedly Structured Text](https://myst-parser.readthedocs.io/en/latest/), the Markdown flavor this documentation is written in.
 ```
