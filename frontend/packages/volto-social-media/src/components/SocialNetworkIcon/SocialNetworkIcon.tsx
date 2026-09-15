@@ -1,8 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
-import config from '@plone/volto/registry';
-import type { SocialNetworkInfo } from '../../types';
+import { getNetwork } from '../../vocabularies/networks';
 
 export interface SocialNetworkIconProps {
   /** The network: the name of a `socialNetwork` utility. */
@@ -28,9 +27,7 @@ const SocialNetworkIcon: React.FC<SocialNetworkIconProps> = ({
   onClick,
   animate,
 }) => {
-  const network: SocialNetworkInfo | undefined = config
-    .getUtility({ type: 'socialNetwork', name: id })
-    ?.method?.();
+  const network = getNetwork(id);
 
   // A link to a network no utility is registered for -- one a project has
   // removed -- has no icon to draw.

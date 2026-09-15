@@ -26,13 +26,14 @@ The section holds three fields: **Share social data**, **Facebook App ID**, and 
 
 1.  Select {guilabel}`Add Link`, beside the **Profiles** label.
 2.  In **Network**, pick the network.
-3.  In **Title**, name the link.
+3.  In **Title**, name the link, or leave it empty to use the network's name.
     The title shows when the pointer rests on the icon, and is what a screen reader announces.
 4.  In **Target**, type the profile's address, and press {kbd}`Enter`.
     To link to a page of the site instead, browse to it.
 5.  Select {guilabel}`Save` in the dialog.
 
-All three fields are required.
+**Network** and **Target** are required.
+The table shows each link by its network's icon and its title.
 
 ## Reorder the links
 

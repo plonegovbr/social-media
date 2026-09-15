@@ -77,6 +77,11 @@ msgstr "Bloco Siga-nos"
 msgid "Headline"
 msgstr "Chamada"
 
+#. Default: "Leave empty to use the network's name."
+#: components/Widgets/schema/socialMediaSchema
+msgid "Leave empty to use the network's name."
+msgstr "Deixe em branco para usar o nome da rede social."
+
 #. Default: "Link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Link"

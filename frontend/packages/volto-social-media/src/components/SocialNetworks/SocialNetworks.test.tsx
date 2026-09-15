@@ -59,7 +59,15 @@ describe('SocialNetworks', () => {
       networks: [{ id: 'github', href: [{ '@id': 'https://github.com/' }] }],
     });
 
-    expect(links()).toEqual([['https://github.com/', 'github']]);
+    expect(links()).toEqual([['https://github.com/', 'GitHub']]);
+  });
+
+  it('names a link without a title to an unregistered network by its id', () => {
+    renderList({
+      networks: [{ id: 'myspace', href: [{ '@id': 'https://myspace.com/' }] }],
+    });
+
+    expect(links()).toEqual([['https://myspace.com/', 'myspace']]);
   });
 
   it('animates every link when asked', () => {

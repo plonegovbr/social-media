@@ -3,6 +3,7 @@ import type { JSONSchema } from '@plone/types';
 import { addStyling } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
 import { messages } from '../../../messages';
 import type { SocialLink } from '../../../types';
+import { networkTitle } from '../../../vocabularies/networks';
 
 /** The networks an editor can pick, as `[token, label]` choices. */
 type NetworkChoices = () => [string, string][];
@@ -42,7 +43,10 @@ export const followUsSchema = (props: FollowUsSchemaProps): JSONSchema => {
   const { intl, networks } = props;
   const allowedNetworks: NetworkChoices = () => {
     const allNetworks = networks || [];
-    return allNetworks.map((item) => [item.id, item.title || item.id]);
+    return allNetworks.map((item) => [
+      item.id,
+      item.title || networkTitle(item.id),
+    ]);
   };
   const schema: JSONSchema = {
     title: intl.formatMessage(messages.FollowUsBlock),

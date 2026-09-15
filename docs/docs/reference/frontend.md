@@ -108,8 +108,15 @@ The Follow Us block asks for it on its `allowedNetworks` field.
 
 ### The edit widget
 
-`SocialLinksWidget` is `OrderedObjectListWidget` with `columns` set to `['id', 'title']`.
-Both are exported by `components/Widgets/OrderedObjectListWidget/OrderedObjectListWidget`, the second as the default export.
+`SocialLinksWidget` is `OrderedObjectListWidget` with three props set.
+
+| Prop | Value | What it does |
+|---|---|---|
+| `columns` | `['id', 'title']` | Shows a link by its network and its title. |
+| `cells` | `SOCIAL_LINK_CELLS` | Shows the network by its icon, named with the network's title. A network with no registered utility shows its `id`. |
+| `prepareRows` | `withNetworkTitles` | Gives a link saved with an empty title the network's title. Changes nothing when the item schema has no `title` field. |
+
+Both widgets are exported by `components/Widgets/OrderedObjectListWidget/OrderedObjectListWidget`, the second as the default export.
 
 The widget renders a list of objects as a table, one row per entry.
 
@@ -129,6 +136,8 @@ An empty list shows *Nothing has been added yet.*
 | `schemaName` | `widgetProps` | Names a registered `schema` utility that builds the item schema. Wins over `schema`. |
 | `schema` | A form schema built in the frontend | The item schema, or a function returning it. Ignored when it has no `fieldsets`. |
 | `columns` | `widgetProps`, or a form schema | The fields of the item schema shown as columns, in order. `SocialLinksWidget` defaults to `['id', 'title']`; `OrderedObjectListWidget` shows every field without it. |
+| `cells` | A frontend component | A function per field name, called with the entry's value and the whole entry, returning what the cell shows. Other columns show the value as text. |
+| `prepareRows` | A frontend component | Called with the entries and the item schema after any change, returning the entries to store. |
 | `isDisabled` | Volto's form | Removes the handles and disables every action. |
 
 A schema function is called with the props of the widget spread, and also with `props` and `intl` as keys.
@@ -143,11 +152,11 @@ It describes one social link.
 
 | Field | Label | Widget | Details |
 |---|---|---|---|
-| `id` | Network | A select | One choice per registered `socialNetwork` utility, labeled with its title. No empty choice. |
-| `title` | Title | A text input | |
+| `id` | Network | A select | One choice per registered `socialNetwork` utility, labeled with its title and ordered by title, from `networkChoices`. No empty choice. |
+| `title` | Title | A text input | Described as *Leave empty to use the network's name.* |
 | `href` | Target | `object_browser`, in `link` mode | Accepts an external address as well as content of the site. |
 
-All three fields are required.
+`id` and `href` are required.
 The title of the schema is *Link*, so the add button of the widget reads {guilabel}`Add Link`.
 
 ### The view widget
@@ -214,7 +223,7 @@ Volto Light Theme renders the `followUs` slot inside its post-footer, when the l
 
 | Module | Props | Renders |
 |---|---|---|
-| `components/SocialNetworks/SocialNetworks` | `networks`, `animate` | A `ul` with the class `social-networks`, with one `li` for each link that has a target, in order. A link without a title is named for its network. |
+| `components/SocialNetworks/SocialNetworks` | `networks`, `animate` | A `ul` with the class `social-networks`, with one `li` for each link that has a target, in order. A link without a title is named with its network's title, or its `id` when the network has no utility. |
 | `components/SocialNetwork/SocialNetwork` | `id`, `title`, `href`, `animate` | Volto's `UniversalLink` to `href`, opening in a new tab, with `rel="me"` and the classes `social-network item <id>`, plus `animate` when animated. |
 | `components/SocialNetworkIcon/SocialNetworkIcon` | `id`, `size`, `color`, `className`, `title`, `onClick`, `animate` | Volto's `Icon` with the network's SVG, `47px` unless `size` says otherwise. The title names the SVG; without one, the icon is hidden from screen readers. Nothing for a network with no utility. |
 | `components/FooterLinks/FooterLinks` | `title`, `animate` | A container with the class `footer_follow_us`, an optional headline, and the links `useNetworks()` returns. Animated unless `animate` is `false`. |
@@ -245,6 +254,20 @@ The add-on registers `FooterLinks` nowhere.
     It matches the form's field by name alone.
 
 ## Helpers and constants
+
+The networks are a client-side vocabulary, read from the registered `socialNetwork` utilities each time a function of `vocabularies/networks` is called.
+
+`getNetworks()`, from `vocabularies/networks`
+:   Every registered network, as `SocialNetworkInfo` objects ordered by title.
+
+`getNetwork(id)`, from `vocabularies/networks`
+:   The network a token names, or `undefined` when no utility is registered for it.
+
+`networkChoices()`, from `vocabularies/networks`
+:   The networks as `[id, title]` pairs, ordered by title, for the `choices` of a select field.
+
+`networkTitle(id)`, from `vocabularies/networks`
+:   The network's title, or `id` itself when no utility is registered for it.
 
 `inheritedData(content, behavior)`, from `helpers/inherit`
 :   A behavior's data as `@components.inherit` holds it, or `undefined` when the expansion was not requested or no object provides the behavior.

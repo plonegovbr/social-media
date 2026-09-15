@@ -188,6 +188,33 @@ describe('OrderedListTable', () => {
     ).toEqual(['', 'Network', 'Title', 'Target', 'Actions']);
   });
 
+  it("marks each column's header with its field", () => {
+    renderTable();
+
+    expect(
+      document.querySelector(
+        'th.social-media-ordered-list__header--id > .social-media-ordered-list__header-label',
+      )?.textContent,
+    ).toBe('Network');
+    expect(
+      document.querySelectorAll('th.social-media-ordered-list__header'),
+    ).toHaveLength(3);
+  });
+
+  it('marks the edit and delete buttons of a row as its actions', () => {
+    renderTable();
+
+    const actions = within(row('a')).getAllByRole('button', {
+      name: /^(Edit|Delete)$/,
+    });
+    expect(actions).toHaveLength(2);
+    for (const action of actions) {
+      expect(
+        action.classList.contains('social-media-ordered-list__action'),
+      ).toBe(true);
+    }
+  });
+
   it('shows only the columns it is given', () => {
     renderTable({ columns: ['id', 'title'] });
 
@@ -203,6 +230,26 @@ describe('OrderedListTable', () => {
         (cell) => cell.textContent,
       ),
     ).toEqual(['', 'GitHub', 'Code', 'github.com/plonegovbr', '']);
+  });
+
+  it('renders a column with the renderer it is given, and the others as text', () => {
+    renderTable({
+      cells: {
+        id: (value: unknown, entry: Row) => <b>{`${value}:${entry.title}`}</b>,
+      },
+    });
+
+    const cells = (row('a') as HTMLTableRowElement).cells;
+    expect(cells[1].querySelector('b')?.textContent).toBe('github:Code');
+    expect(cells[2].textContent).toBe('Code');
+  });
+
+  it('sits the table in a body of its own, which pads its sides', () => {
+    renderTable();
+
+    expect(
+      document.querySelector('.social-media-ordered-list__body > table'),
+    ).toBeTruthy();
   });
 
   it('says so when there is nothing on the list', () => {

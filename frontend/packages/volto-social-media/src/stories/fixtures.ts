@@ -34,7 +34,10 @@ export const SOCIAL_LINK_SCHEMA: ItemSchema = {
       ],
       noValueOption: false,
     },
-    title: { title: 'Title' },
+    title: {
+      title: 'Title',
+      description: "Leave empty to use the network's name.",
+    },
     href: {
       title: 'Target',
       widget: 'object_browser',
@@ -43,7 +46,7 @@ export const SOCIAL_LINK_SCHEMA: ItemSchema = {
       allowExternals: true,
     },
   },
-  required: ['id', 'title', 'href'],
+  required: ['id', 'href'],
 };
 
 /**

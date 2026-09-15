@@ -14,16 +14,23 @@ beforeAll(() => {
 });
 
 describe('socialMediaSchema', () => {
-  it('describes a link by its network, title and target, all required', () => {
+  it('describes a link by its network, title and target', () => {
     expect(schema.title).toBe('Link');
     expect(schema.fieldsets[0].fields).toEqual(['id', 'title', 'href']);
-    expect(schema.required).toEqual(['id', 'title', 'href']);
   });
 
-  it('offers every registered network, by name', () => {
+  it('requires the network and the target, not the title', () => {
+    expect(schema.required).toEqual(['id', 'href']);
+    expect(schema.properties.title.description).toBe(
+      "Leave empty to use the network's name.",
+    );
+  });
+
+  it('offers every registered network, by name, in the order of the names', () => {
     const choices = schema.properties.id.choices;
 
     expect(choices).toHaveLength(25);
+    expect(choices[0]).toEqual(['bluesky', 'BlueSky']);
     expect(choices).toContainEqual(['github', 'GitHub']);
     expect(choices).toContainEqual(['x', 'X (Twitter)']);
     expect(schema.properties.id.noValueOption).toBe(false);

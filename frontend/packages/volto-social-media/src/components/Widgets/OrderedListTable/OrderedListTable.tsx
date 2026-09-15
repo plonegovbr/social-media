@@ -8,6 +8,9 @@
  * because its field asks for `object_browser`, not because this component
  * knows.
  *
+ * **A cell shows its field's text**, unless `cells` names a renderer for its
+ * column: the social links widget shows a network by its icon.
+ *
  * **Nothing is saved here.** Every action changes the field's value, and the
  * content form saves it or does not. Deleting still asks first: a row removed
  * by mistake can otherwise only be recovered by cancelling every other change
@@ -70,6 +73,15 @@ const messages = defineMessages({
   },
 });
 
+/**
+ * What one column's cell shows for an entry.
+ *
+ * @param value The entry's value for the column's field.
+ * @param row The whole entry.
+ * @returns The cell's content.
+ */
+export type CellRenderer = (value: unknown, row: Row) => ReactNode;
+
 export type OrderedListTableProps = {
   /** The field's id, as `Field` hands it to a widget. */
   id: string;
@@ -82,6 +94,8 @@ export type OrderedListTableProps = {
   schema: ItemSchema;
   /** The schema fields shown as columns, in order. */
   columns: string[];
+  /** How a column's cells render, by field name. Other columns show text. */
+  cells?: Record<string, CellRenderer>;
   /** Given every entry, in order, after any change. */
   onChangeRows: (rows: Row[]) => void;
   /**
@@ -93,6 +107,9 @@ export type OrderedListTableProps = {
   [key: string]: unknown;
 };
 
+/** No column with a renderer of its own: every cell shows text. */
+const NO_RENDERERS: Record<string, CellRenderer> = {};
+
 /** The loaded libraries, keyed as `config.settings.loadables` names them. */
 type Libraries = Record<string, any>;
 
@@ -100,6 +117,7 @@ type Libraries = Record<string, any>;
 type Shared = {
   schema: ItemSchema;
   columns: string[];
+  cells: Record<string, CellRenderer>;
   disabled: boolean;
   edit: (index: number) => void;
   remove: (index: number) => void;
@@ -153,8 +171,15 @@ const Frame = ({
             aria-label={intl.formatMessage(messages.columnOrder)}
           />
           {columns.map((name) => (
-            <Table.HeaderCell key={name}>
-              {schema.properties[name]?.title ?? name}
+            <Table.HeaderCell
+              key={name}
+              className={`social-media-ordered-list__header social-media-ordered-list__header--${name}`}
+            >
+              {/* A span, so a stylesheet can hide the label and keep the
+                  column: the sidebar hides the network's. */}
+              <span className="social-media-ordered-list__header-label">
+                {schema.properties[name]?.title ?? name}
+              </span>
             </Table.HeaderCell>
           ))}
           <Table.HeaderCell textAlign="right">
@@ -189,7 +214,7 @@ const EntryRow = ({
   dragging?: boolean;
 }) => {
   const intl = useIntl();
-  const { schema, columns, disabled, edit, remove } = shared;
+  const { schema, columns, cells, disabled, edit, remove } = shared;
   return (
     <tr
       ref={rowRef}
@@ -199,7 +224,11 @@ const EntryRow = ({
     >
       <td className="collapsing">{handle}</td>
       {columns.map((name) => (
-        <td key={name}>{cellText(schema.properties[name], row[name])}</td>
+        <td key={name}>
+          {cells[name]
+            ? cells[name](row[name], row)
+            : cellText(schema.properties[name], row[name])}
+        </td>
       ))}
       <td className="right aligned collapsing">
         {/* `type="button"` on both: a button's default type is submit, and
@@ -209,6 +238,7 @@ const EntryRow = ({
           basic
           icon
           disabled={disabled}
+          className="social-media-ordered-list__action"
           aria-label={intl.formatMessage(messages.edit)}
           title={intl.formatMessage(messages.edit)}
           onClick={() => edit(index)}
@@ -220,6 +250,7 @@ const EntryRow = ({
           basic
           icon
           disabled={disabled}
+          className="social-media-ordered-list__action"
           data-action="delete"
           aria-label={intl.formatMessage(messages.delete)}
           title={intl.formatMessage(messages.delete)}
@@ -346,7 +377,15 @@ const OrderedListTable: React.FC<OrderedListTableProps> = (props) => {
   // What is not the table's goes to `FormFieldWrapper`. `columns` in
   // particular must not: the wrapper reads a prop of that name as its layout
   // width, and drops the label for anything but 2.
-  const { rows, schema, columns, onChangeRows, validate, ...field } = props;
+  const {
+    rows,
+    schema,
+    columns,
+    cells = NO_RENDERERS,
+    onChangeRows,
+    validate,
+    ...field
+  } = props;
   const { isDisabled } = props;
   const intl = useIntl();
   const libraries: Libraries = useLazyLibs(DND_LIBRARIES);
@@ -394,6 +433,7 @@ const OrderedListTable: React.FC<OrderedListTableProps> = (props) => {
   const shared: Shared = {
     schema,
     columns,
+    cells,
     disabled,
     edit: setEditing,
     remove: setDeleting,
@@ -463,7 +503,7 @@ const OrderedListTable: React.FC<OrderedListTableProps> = (props) => {
           <Icon name={addSVG} size="20px" />
         </Button>
       </FormFieldWrapper>
-      {table}
+      <div className="social-media-ordered-list__body">{table}</div>
       {/* See the module docstring: the dialog's submit must not reach the
           content form. */}
       <div onSubmit={(event) => event.stopPropagation()}>

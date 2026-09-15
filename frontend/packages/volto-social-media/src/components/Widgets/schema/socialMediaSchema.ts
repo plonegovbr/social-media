@@ -1,8 +1,7 @@
 import type { BlockEditProps } from '@plone/types';
 import { defineMessages } from 'react-intl';
 import type { IntlShape } from 'react-intl';
-import config from '@plone/volto/registry';
-import type { ConfigType } from '@plone/registry';
+import { networkChoices } from '../../../vocabularies/networks';
 
 const messages = defineMessages({
   network: {
@@ -12,6 +11,10 @@ const messages = defineMessages({
   title: {
     id: 'Title',
     defaultMessage: 'Title',
+  },
+  titleDescription: {
+    id: "Leave empty to use the network's name.",
+    defaultMessage: "Leave empty to use the network's name.",
   },
   item: {
     id: 'Link',
@@ -31,14 +34,12 @@ const messages = defineMessages({
   },
 });
 
-function getAvailableNetworks(config: ConfigType) {
-  const allNetworks = config.getUtilities({ type: 'socialNetwork' });
-  return Object.entries(allNetworks).map(([name, networkUtility]) => {
-    const networkInfo = networkUtility.method();
-    return [networkInfo.id, networkInfo.title];
-  });
-}
-
+/**
+ * One social link, as the `social_media_object_list` widget edits it.
+ *
+ * The network is picked from the `socialNetwork` utilities. The title may be
+ * left empty: the widget stores the network's name in its place.
+ */
 export function socialMediaSchema({
   props,
   intl,
@@ -46,7 +47,6 @@ export function socialMediaSchema({
   props: BlockEditProps;
   intl: IntlShape;
 }) {
-  const availableNetworks = getAvailableNetworks(config);
   return {
     title: intl.formatMessage(messages.item),
     addMessage: intl.formatMessage(messages.addLink),
@@ -61,11 +61,12 @@ export function socialMediaSchema({
     properties: {
       id: {
         title: intl.formatMessage(messages.network),
-        choices: availableNetworks,
+        choices: networkChoices(),
         noValueOption: false,
       },
       title: {
         title: intl.formatMessage(messages.title),
+        description: intl.formatMessage(messages.titleDescription),
       },
       href: {
         title: intl.formatMessage(messages.Target),
@@ -75,6 +76,6 @@ export function socialMediaSchema({
         allowExternals: true,
       },
     },
-    required: ['id', 'title', 'href'],
+    required: ['id', 'href'],
   };
 }

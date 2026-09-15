@@ -30,8 +30,11 @@ import type { IntlShape } from 'react-intl';
 import config from '@plone/volto/registry';
 
 import OrderedListTable from '../OrderedListTable/OrderedListTable';
+import type { CellRenderer } from '../OrderedListTable/OrderedListTable';
+import SocialNetworkIcon from '../../SocialNetworkIcon/SocialNetworkIcon';
 import { withRowIds } from '../../../helpers/orderedList';
 import type { ItemSchema, Row } from '../../../helpers/orderedList';
+import { getNetwork, networkTitle } from '../../../vocabularies/networks';
 
 type SchemaSource =
   | ItemSchema
@@ -47,6 +50,10 @@ export type OrderedObjectListWidgetProps = {
   schemaName?: string;
   /** The item schema's fields shown as columns, in order. */
   columns?: string[];
+  /** How a column's cells render, by field name. Other columns show text. */
+  cells?: Record<string, CellRenderer>;
+  /** Completes the entries before they are reported, given the item schema. */
+  prepareRows?: (rows: Row[], schema: ItemSchema) => Row[];
   onChange: (id: string, value: Row[]) => void;
   [key: string]: unknown;
 };
@@ -99,17 +106,20 @@ export function columnsOf(schema: ItemSchema, columns?: string[]): string[] {
 const OrderedObjectListWidget: React.FC<OrderedObjectListWidgetProps> = (
   props,
 ) => {
-  const { id, value, columns, onChange } = props;
+  const { id, value, columns, prepareRows, onChange, ...rest } = props;
   const intl = useIntl();
   const schema = resolveItemSchema(props, intl);
 
   return (
     <OrderedListTable
-      {...props}
+      {...rest}
+      id={id}
       rows={value ?? []}
       schema={schema}
       columns={columnsOf(schema, columns)}
-      onChangeRows={(rows) => onChange(id, withRowIds(rows))}
+      onChangeRows={(rows) =>
+        onChange(id, withRowIds(prepareRows ? prepareRows(rows, schema) : rows))
+      }
     />
   );
 };
@@ -118,15 +128,68 @@ const OrderedObjectListWidget: React.FC<OrderedObjectListWidgetProps> = (
 export const SOCIAL_LINK_COLUMNS = ['id', 'title'];
 
 /**
+ * A link's network, as its row shows it: the network's icon, named with the
+ * network's title.
+ *
+ * @param value The network's token.
+ * @returns The icon, or the token as text for a network no utility is
+ *   registered for, which has no icon to draw.
+ */
+export const NetworkCell: CellRenderer = (value) => {
+  const network = typeof value === 'string' ? getNetwork(value) : undefined;
+  if (!network) {
+    return typeof value === 'string' ? value : '';
+  }
+  return (
+    <SocialNetworkIcon id={network.id} title={network.title} size="24px" />
+  );
+};
+
+/** The columns a social link renders with more than text. */
+export const SOCIAL_LINK_CELLS: Record<string, CellRenderer> = {
+  id: NetworkCell,
+};
+
+/**
+ * The entries, each titled.
+ *
+ * @param rows The entries, in order.
+ * @param schema The item schema.
+ * @returns The same entries, with an entry whose title is empty given its
+ *   network's title. Returned as they were when the schema has no `title`
+ *   field, as the Follow Us block's networks have not.
+ */
+export function withNetworkTitles(rows: Row[], schema: ItemSchema): Row[] {
+  if (!schema.properties.title) {
+    return rows;
+  }
+  return rows.map((row) => {
+    const title = typeof row.title === 'string' ? row.title.trim() : '';
+    return title || typeof row.id !== 'string' || !row.id
+      ? row
+      : { ...row, title: networkTitle(row.id) };
+  });
+}
+
+/**
  * The social links widget, registered as `social_media_object_list`.
  *
  * `plonegovbr.socialmedia` asks for that widget, with the `socialMedia` schema
  * name, on the `social_links` field of its behaviors. A link is recognised by
- * its network and its title, so those are the columns; the target is one
- * click away, in the dialog. A `columns` the backend sends still wins.
+ * its network and its title, so those are the columns, the network shown by
+ * its icon; the target is one click away, in the dialog. A `columns` the
+ * backend sends still wins. A link saved without a title is given its
+ * network's.
  */
 export const SocialLinksWidget: React.FC<OrderedObjectListWidgetProps> = (
   props,
-) => <OrderedObjectListWidget columns={SOCIAL_LINK_COLUMNS} {...props} />;
+) => (
+  <OrderedObjectListWidget
+    columns={SOCIAL_LINK_COLUMNS}
+    cells={SOCIAL_LINK_CELLS}
+    prepareRows={withNetworkTitles}
+    {...props}
+  />
+);
 
 export default OrderedObjectListWidget;

@@ -75,11 +75,12 @@ It is the list both rows of icons came from.
 1.  Select {guilabel}`Add Link`, beside the **Profiles** label.
     A dialog opens.
 2.  In **Network**, choose **GitHub**.
-3.  In **Title**, type `GitHub`.
+3.  Leave **Title** empty.
 4.  In **Target**, type `https://github.com/plonegovbr`, and press {kbd}`Enter`.
 5.  Select {guilabel}`Save` in the dialog.
 
 The table now has five rows, and GitHub is the last.
+Its row shows the GitHub icon, and the title `GitHub`: a link saved without a title takes its network's name.
 Look at the Follow Us block on the page: it already shows a fifth icon, although you have not saved the page.
 
 ## Put it first

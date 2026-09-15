@@ -79,6 +79,11 @@ msgstr "Bloque \"Síganos\""
 msgid "Headline"
 msgstr "Encabezamiento"
 
+#. Default: "Leave empty to use the network's name."
+#: components/Widgets/schema/socialMediaSchema
+msgid "Leave empty to use the network's name."
+msgstr "Déjelo vacío para usar el nombre de la red."
+
 #. Default: "Link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Link"
