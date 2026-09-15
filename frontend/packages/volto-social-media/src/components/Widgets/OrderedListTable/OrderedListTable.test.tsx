@@ -291,6 +291,36 @@ describe('OrderedListTable', () => {
     ]);
   });
 
+  it('renders a field named id with the widget its choices ask for', async () => {
+    // Volto maps a field named `id` to its short name widget, ahead of any
+    // `choices` or `widget`, and `ModalForm` names each field for its key.
+    // The test configuration maps no such name, so this one adds it.
+    const current = config.widgets;
+    const ShortNameWidget = () => <span data-widget="short-name" />;
+    const SelectWidget = ({ title }: any) => (
+      <span data-widget="select">{title}</span>
+    );
+    config.set('widgets', {
+      ...current,
+      id: { ...current.id, id: ShortNameWidget },
+      widget: { ...current.widget, select: SelectWidget },
+      choices: SelectWidget,
+    });
+    try {
+      renderTable();
+
+      fireEvent.click(within(row('a')).getByRole('button', { name: 'Edit' }));
+      await within(dialog()).findByLabelText('Title');
+
+      expect(
+        dialog().querySelector('[data-widget="select"]')?.textContent,
+      ).toBe('Network');
+      expect(dialog().querySelector('[data-widget="short-name"]')).toBeNull();
+    } finally {
+      config.set('widgets', current);
+    }
+  });
+
   it('opens a new entry empty, whatever was edited before', async () => {
     // `ModalForm` keeps what it was given in state, so a dialog reused
     // across entries would carry the last one's fields into the next.

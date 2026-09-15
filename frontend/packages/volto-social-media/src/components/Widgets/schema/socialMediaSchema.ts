@@ -61,6 +61,7 @@ export function socialMediaSchema({
     properties: {
       id: {
         title: intl.formatMessage(messages.network),
+        widget: 'select',
         choices: networkChoices(),
         noValueOption: false,
       },

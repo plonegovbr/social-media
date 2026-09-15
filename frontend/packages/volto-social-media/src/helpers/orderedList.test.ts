@@ -2,12 +2,14 @@ import { describe, expect, it } from 'vitest';
 
 import {
   cellText,
+  dialogSchema,
   movedIds,
   movedRows,
   newRowId,
   rowKeys,
   withRowIds,
 } from './orderedList';
+import type { ItemSchema } from './orderedList';
 
 describe('movedIds', () => {
   const ids = ['a', 'b', 'c'];
@@ -108,6 +110,51 @@ describe('withRowIds', () => {
     const row = { '@id': 'a', title: 'Blog' };
 
     expect(withRowIds([row])[0]).toBe(row);
+  });
+});
+
+describe('dialogSchema', () => {
+  // Strings stand in for widget components: only which one is kept matters.
+  const widgets = {
+    id: { id: 'short-name' },
+    choices: 'select',
+    default: 'text',
+  };
+  const schema: ItemSchema = {
+    title: 'Link',
+    fieldsets: [{ id: 'default', title: 'Default', fields: ['id', 'title'] }],
+    properties: {
+      id: { title: 'Network', choices: [['github', 'GitHub']] },
+      title: { title: 'Title', widgets: { own: true } },
+    },
+    required: ['id'],
+  };
+
+  it('gives a field the widgets without the mapping by field name', () => {
+    const { properties } = dialogSchema(schema, widgets);
+
+    expect(properties.id.widgets).toEqual({
+      id: {},
+      choices: 'select',
+      default: 'text',
+    });
+    expect(properties.id).toMatchObject(schema.properties.id);
+  });
+
+  it('keeps the widgets a field names itself', () => {
+    expect(dialogSchema(schema, widgets).properties.title.widgets).toEqual({
+      own: true,
+    });
+  });
+
+  it('keeps the rest of the schema, and changes nothing it was given', () => {
+    const result = dialogSchema(schema, widgets);
+
+    expect(result.title).toBe('Link');
+    expect(result.fieldsets).toBe(schema.fieldsets);
+    expect(result.required).toBe(schema.required);
+    expect(schema.properties.id).not.toHaveProperty('widgets');
+    expect(widgets.id).toEqual({ id: 'short-name' });
   });
 });
 

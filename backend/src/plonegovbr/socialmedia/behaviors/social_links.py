@@ -20,17 +20,17 @@ class ISocialLinks(model.Schema):
         ],
     )
 
-    directives.widget(
-        "social_links",
-        frontendOptions={
-            "widget": "social_media_object_list",
-            "widgetProps": {"schemaName": "socialMedia"},
-        },
-    )
     social_links = JSONField(
         title=_("Profiles"),
         schema=base.OBJECT_LIST,
         default=base.OBJECT_LIST_DEFAULT_VALUE,
         required=False,
         widget="",
+    )
+    directives.widget(
+        "social_links",
+        frontendOptions={
+            "widget": "social_media_object_list",
+            "widgetProps": {"schemaName": "socialMedia"},
+        },
     )

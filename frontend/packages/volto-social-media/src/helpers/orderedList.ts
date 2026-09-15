@@ -131,6 +131,36 @@ export function withRowIds(rows: Row[]): Row[] {
 }
 
 /**
+ * The item schema, as the entry dialog renders it.
+ *
+ * Volto's `Field` picks a widget by the field's name before anything else, and
+ * `config.widgets.id` maps some names to widgets of their own: a field named
+ * `id` gets the short name widget, whatever its `widget` or `choices` say.
+ * `ModalForm` names each field for its key, so a social link's network -- its
+ * `id` -- would be typed rather than picked. `object_list` never meets this,
+ * as its fields are named for their position, so each field is given the
+ * widgets without the mapping by name, and a schema written for `object_list`
+ * renders the same in the dialog.
+ *
+ * @param schema The item schema.
+ * @param widgets The widgets, as `config.widgets` holds them.
+ * @returns The schema, each field carrying those widgets unless it names its
+ *   own.
+ */
+export function dialogSchema(schema: ItemSchema, widgets: object): ItemSchema {
+  const unnamed = { ...widgets, id: {} };
+  return {
+    ...schema,
+    properties: Object.fromEntries(
+      Object.entries(schema.properties).map(([name, property]) => [
+        name,
+        { widgets: unnamed, ...property },
+      ]),
+    ),
+  };
+}
+
+/**
  * What a table cell shows for one field of an entry.
  *
  * @param property The field, as the item schema describes it.

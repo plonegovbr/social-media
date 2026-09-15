@@ -102,9 +102,14 @@ A link whose `id` names no registered utility keeps its list item and its anchor
 |---|---|---|
 | `config.widgets.widget` | `social_media_object_list` | `SocialLinksWidget` |
 | `config.widgets.views.widget` | `social_media_object_list` | `SocialLinksViewWidget` |
+| `config.widgets.views.id` | `social_links` | `SocialLinksViewWidget` |
 
 The backend asks for `social_media_object_list` on both `social_links` fields, as {ref}`reference-behaviors-widget` shows.
 The Follow Us block asks for it on its `allowedNetworks` field.
+
+A content view picks a view widget by the field's name, or by a `widget` set in a frontend schema.
+It does not read the widget the backend names in `frontendOptions`.
+So the view widget is also registered for the field name `social_links`.
 
 ### The edit widget
 
@@ -141,6 +146,9 @@ An empty list shows *Nothing has been added yet.*
 | `isDisabled` | Volto's form | Removes the handles and disables every action. |
 
 A schema function is called with the props of the widget spread, and also with `props` and `intl` as keys.
+
+The dialog picks the widget of a field as `object_list` does, never by the field's name.
+A field named `id` renders the widget its `widget` or `choices` asks for, rather than Volto's short name widget.
 
 The value is a list of objects, in order.
 Any change gives an `@id` to each entry without one, as Volto's `object_list` widget does.

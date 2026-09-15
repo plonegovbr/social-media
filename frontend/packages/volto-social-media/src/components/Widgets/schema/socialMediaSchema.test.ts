@@ -33,6 +33,7 @@ describe('socialMediaSchema', () => {
     expect(choices[0]).toEqual(['bluesky', 'BlueSky']);
     expect(choices).toContainEqual(['github', 'GitHub']);
     expect(choices).toContainEqual(['x', 'X (Twitter)']);
+    expect(schema.properties.id.widget).toBe('select');
     expect(schema.properties.id.noValueOption).toBe(false);
   });
 

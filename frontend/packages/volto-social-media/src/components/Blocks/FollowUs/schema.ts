@@ -26,6 +26,7 @@ const NetworkSchema = ({
   properties: {
     id: {
       title: intl.formatMessage(messages.NetworkTitle),
+      widget: 'select',
       choices: allowedNetworks(),
       noValueOption: false,
     },

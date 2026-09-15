@@ -35,6 +35,7 @@ import ModalForm from '@plone/volto/components/manage/Form/ModalForm';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import { applySchemaDefaults } from '@plone/volto/helpers/Blocks/Blocks';
 import { useLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
+import config from '@plone/volto/registry';
 
 import addSVG from '@plone/volto/icons/add.svg';
 import deleteSVG from '@plone/volto/icons/delete.svg';
@@ -42,7 +43,12 @@ import dragSVG from '@plone/volto/icons/drag.svg';
 import pencilSVG from '@plone/volto/icons/pencil.svg';
 
 import ConfirmModal from '../../ConfirmModal/ConfirmModal';
-import { cellText, movedRows, rowKeys } from '../../../helpers/orderedList';
+import {
+  cellText,
+  dialogSchema,
+  movedRows,
+  rowKeys,
+} from '../../../helpers/orderedList';
 import type { ItemSchema, Row } from '../../../helpers/orderedList';
 
 import './OrderedListTable.scss';
@@ -519,7 +525,9 @@ const OrderedListTable: React.FC<OrderedListTableProps> = (props) => {
                 ? addLabel
                 : intl.formatMessage(messages.editItem, { item })
             }
-            schema={schema}
+            // Each field's widget picked as `object_list` picks it, not by
+            // the field's name: see `dialogSchema`.
+            schema={dialogSchema(schema, config.widgets)}
             formData={
               editing === 'new'
                 ? applySchemaDefaults({ data: {}, schema, intl })
