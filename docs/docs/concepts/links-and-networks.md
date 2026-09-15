@@ -34,6 +34,7 @@ The `social_links` field is a JSON field whose schema allows any list of objects
 The backend accepts any network id, and any shape of entry.
 
 The choices an editor sees come from the frontend, at the moment the form is built.
+They are a client-side vocabulary, read from the registered utilities, so a network a project registers is offered with the rest.
 That keeps the list of networks in one place, the place that also has the icons.
 
 The cost is that the backend validates nothing.
@@ -60,7 +61,7 @@ The first icon in the footer is the first entry of the field.
 
 That is why the links are edited as a table.
 Volto's own `object_list` widget edits the same kind of value as a stack of accordions, which shows one entry at a time and makes the order hard to see.
-The table shows every link as a row, by network and title, with a handle to drag it by, and opens the whole link in a dialog.
+The table shows every link as a row, by its network's icon and its title, with a handle to drag it by, and opens the whole link in a dialog.
 
 Both widgets store the same shape, including the `@id` each entry is given.
 A value edited with one stays editable with the other.

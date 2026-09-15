@@ -9,6 +9,11 @@
   margin-bottom: var(--social-media-ordered-list-gap, 12px);
 }
 
+/** The table, kept off the edges of the form it sits in. */
+.social-media-ordered-list__body {
+  padding-inline: var(--social-media-ordered-list-inline-padding, 1rem);
+}
+
 /** A row's drag handle: the grip, without a button's chrome. */
 .social-media-ordered-list__handle {
   display: inline-flex;
@@ -31,4 +36,41 @@
 /** The one row an empty list has. */
 .social-media-ordered-list__empty {
   color: var(--social-media-ordered-list-muted, rgb(0 0 0 / 60%));
+}
+
+/**
+ * The widget in the sidebar -- a block's settings, or a content form's fields
+ * -- where there is less room.
+ */
+.sidebar-container .social-media-ordered-list {
+  .social-media-ordered-list__body {
+    padding-inline: 0;
+  }
+
+  /*
+   * The network column's label, which its icons make redundant. `id` is the
+   * network's field, in a social link and in a Follow Us block's network
+   * alike. Hidden from sight only: a screen reader still names the column.
+   */
+  .social-media-ordered-list__header--id
+    .social-media-ordered-list__header-label {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /*
+   * The buttons without a border. A basic button draws it as an inset
+   * box-shadow, which Volto removes inside `#main` and modals only, and the
+   * sidebar is outside both. The focus outline is left alone.
+   */
+  .ui.basic.button.social-media-ordered-list__add,
+  .ui.basic.button.social-media-ordered-list__action {
+    border: none;
+    box-shadow: none;
+  }
 }

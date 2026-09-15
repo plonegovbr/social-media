@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
+import config from '@plone/volto/registry';
+
 import OrderedObjectListWidget, {
   SocialLinksWidget,
 } from './OrderedObjectListWidget';
 import type { OrderedObjectListWidgetProps } from './OrderedObjectListWidget';
 import { DND_LIBRARIES } from '../OrderedListTable/OrderedListTable';
+import installNetworks from '../../../config/networks';
 import { SOCIAL_LINK_SCHEMA, SOCIAL_LINKS } from '../../../stories/fixtures';
 import { withLazyLibraries, withWrapper } from '../../../stories/decorators';
+
+// The social links widget shows a network by its registered icon.
+installNetworks(config);
 
 const meta = {
   title: 'Components/Widgets/OrderedObjectListWidget',

@@ -44,7 +44,7 @@ Declare `@plonegovbr/volto-social-media` in that add-on's `addons`, so its confi
     A link stores the `id`, and the icon is looked up by `name`.
 
 Restart the frontend.
-The new network is a choice of the **Network** field in the link dialog.
+The new network is a choice of the **Network** field in the link dialog, in the order of the titles.
 
 ## Change a network's title or icon
 
@@ -65,7 +65,7 @@ export default function applyConfig(config: ConfigType) {
 }
 ```
 
-Every existing link to the network shows the new title in the dialog, and the new icon on the page.
+Every existing link to the network shows the new title in the dialog, and the new icon in the table and on the page.
 
 ## Keep fallback links in the configuration
 

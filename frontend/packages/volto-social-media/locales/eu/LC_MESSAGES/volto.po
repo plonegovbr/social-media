@@ -78,6 +78,11 @@ msgstr "Jarrai gaitzazu blokea"
 msgid "Headline"
 msgstr "Goiburukoa"
 
+#. Default: "Leave empty to use the network's name."
+#: components/Widgets/schema/socialMediaSchema
+msgid "Leave empty to use the network's name."
+msgstr ""
+
 #. Default: "Link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Link"

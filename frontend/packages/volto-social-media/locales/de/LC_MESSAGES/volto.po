@@ -72,6 +72,11 @@ msgstr "Social Media Block"
 msgid "Headline"
 msgstr "Überschrift"
 
+#. Default: "Leave empty to use the network's name."
+#: components/Widgets/schema/socialMediaSchema
+msgid "Leave empty to use the network's name."
+msgstr "Leer lassen, um den Namen des Netzwerks zu verwenden."
+
 #. Default: "Link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Link"

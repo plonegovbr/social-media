@@ -1,0 +1,1 @@
+Offer the networks of a social link from a client-side vocabulary of the registered `socialNetwork` utilities, ordered by title, and show each link's network by its icon in the social links widget. @ericof

@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import SocialNetwork from '../SocialNetwork/SocialNetwork';
+import { networkTitle } from '../../vocabularies/networks';
 import type { SocialLink } from '../../types';
 
 export interface SocialNetworksProps {
@@ -26,7 +27,7 @@ const SocialNetworks: React.FC<SocialNetworksProps> = ({
               <SocialNetwork
                 id={network.id}
                 href={href}
-                title={network.title || network.id}
+                title={network.title || networkTitle(network.id)}
                 animate={animate}
               />
             </li>

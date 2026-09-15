@@ -8,6 +8,7 @@ import config from '@plone/volto/registry';
 import OrderedObjectListWidget, {
   columnsOf,
   SocialLinksWidget,
+  withNetworkTitles,
 } from './OrderedObjectListWidget';
 import installNetworks from '../../../config/networks';
 import { socialMediaSchema } from '../schema/socialMediaSchema';
@@ -29,6 +30,7 @@ const TextWidget = ({ id, title, value, onChange }: any) => (
 beforeAll(() => {
   widgets = config.widgets;
   config.set('widgets', { ...widgets, default: TextWidget });
+  installNetworks(config as any);
 });
 
 afterAll(() => {
@@ -77,9 +79,72 @@ function headers(): (string | null)[] {
 
 /** The text of each cell in the first row. */
 function firstRow(): (string | null)[] {
-  const row = document.querySelector('tr[data-row]') as HTMLTableRowElement;
-  return [...row.cells].map((cell) => cell.textContent);
+  return [...firstRowCells()].map((cell) => cell.textContent);
 }
+
+/** The cells of the first row. */
+function firstRowCells(): HTMLCollectionOf<HTMLTableCellElement> {
+  return (document.querySelector('tr[data-row]') as HTMLTableRowElement).cells;
+}
+
+/**
+ * The link schema, its network typed rather than picked.
+ *
+ * The test configuration's select is a placeholder with nothing to pick from,
+ * so the network is a plain field, and nothing is required.
+ */
+const TYPED_NETWORK_SCHEMA = {
+  ...SOCIAL_LINK_SCHEMA,
+  properties: {
+    ...SOCIAL_LINK_SCHEMA.properties,
+    id: { title: 'Network' },
+  },
+  required: [],
+};
+
+describe('withNetworkTitles', () => {
+  it("gives an entry without a title its network's title", () => {
+    expect(
+      withNetworkTitles(
+        [{ id: 'github' }, { id: 'x', title: '  ' }],
+        SOCIAL_LINK_SCHEMA,
+      ),
+    ).toEqual([
+      { id: 'github', title: 'GitHub' },
+      { id: 'x', title: 'X (Twitter)' },
+    ]);
+  });
+
+  it('keeps a title that was given', () => {
+    const rows = [{ id: 'github', title: 'Code' }];
+
+    expect(withNetworkTitles(rows, SOCIAL_LINK_SCHEMA)).toEqual(rows);
+  });
+
+  it('titles an entry to a network with no registered utility with its id', () => {
+    expect(withNetworkTitles([{ id: 'myspace' }], SOCIAL_LINK_SCHEMA)).toEqual([
+      { id: 'myspace', title: 'myspace' },
+    ]);
+  });
+
+  it('leaves an entry without a network as it is', () => {
+    expect(withNetworkTitles([{ title: '' }], SOCIAL_LINK_SCHEMA)).toEqual([
+      { title: '' },
+    ]);
+  });
+
+  it('titles nothing when the item schema has no title field', () => {
+    // The Follow Us block's networks: a network is all an entry has.
+    const schema = {
+      ...SOCIAL_LINK_SCHEMA,
+      properties: { id: SOCIAL_LINK_SCHEMA.properties.id },
+    };
+
+    expect(withNetworkTitles([{ id: 'github' }], schema)).toEqual([
+      { id: 'github' },
+    ]);
+  });
+});
 
 describe('columnsOf', () => {
   it('is every field when no columns are asked for', () => {
@@ -170,10 +235,69 @@ describe('SocialLinksWidget', () => {
     expect(headers()).toEqual(['', 'Target', 'Actions']);
   });
 
+  it('shows a network by its icon, named with its title', () => {
+    renderWidget({}, SocialLinksWidget);
+
+    const icon = firstRowCells()[1].querySelector('svg');
+    expect([...icon!.classList]).toEqual(
+      expect.arrayContaining(['social-network', 'github']),
+    );
+    expect(icon!.querySelector('title')?.textContent).toBe('GitHub');
+  });
+
+  it('shows a network with no registered utility by its id', () => {
+    renderWidget(
+      { value: [{ '@id': 'm', id: 'myspace', title: 'Old' }] },
+      SocialLinksWidget,
+    );
+
+    expect(firstRowCells()[1].querySelector('svg')).toBeNull();
+    expect(firstRow()).toEqual(['', 'myspace', 'Old', '']);
+  });
+
+  it("stores a link saved without a title under its network's title", async () => {
+    const onChange = renderWidget(
+      { schema: TYPED_NETWORK_SCHEMA },
+      SocialLinksWidget,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add Link' }));
+    const form = document.querySelector('.ui.modal form') as HTMLElement;
+    fireEvent.change(await within(form).findByLabelText('Network'), {
+      target: { value: 'website' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    const [, value] = onChange.mock.calls[0];
+    expect(value.slice(0, 2)).toEqual(SOCIAL_LINKS);
+    expect(value[2]).toMatchObject({ id: 'website', title: 'Website' });
+  });
+
+  it('keeps the title an editor gave', async () => {
+    const onChange = renderWidget(
+      { schema: TYPED_NETWORK_SCHEMA },
+      SocialLinksWidget,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add Link' }));
+    const form = document.querySelector('.ui.modal form') as HTMLElement;
+    fireEvent.change(await within(form).findByLabelText('Network'), {
+      target: { value: 'website' },
+    });
+    fireEvent.change(within(form).getByLabelText('Title'), {
+      target: { value: 'Blog' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onChange.mock.calls[0][1][2]).toMatchObject({
+      id: 'website',
+      title: 'Blog',
+    });
+  });
+
   it('builds a link from the socialMedia schema, offering the registered networks', () => {
     // What `plonegovbr.socialmedia` sends for `social_links`: no schema, only
     // the name of the utility this package registers.
-    installNetworks(config as any);
     config.registerUtility({
       name: 'socialMedia',
       type: 'schema',
