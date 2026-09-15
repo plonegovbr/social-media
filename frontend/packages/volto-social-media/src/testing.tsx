@@ -12,6 +12,7 @@
 import React from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { createIntl, IntlProvider as BareIntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import {
   render as renderBare,
@@ -80,5 +81,63 @@ export const testIntl = createIntl({
   messages: {},
   onError: () => {},
 });
+
+/**
+ * A redux store holding exactly the state a test gives it.
+ *
+ * Dispatching changes nothing, so the state a test sets is the state the
+ * component reads; what was dispatched is kept in `dispatched`, for a test
+ * that asserts on it.
+ *
+ * @param state The store's whole state.
+ * @returns The store.
+ */
+export function mockStore(state: Record<string, unknown> = {}) {
+  const dispatched: unknown[] = [];
+  return {
+    dispatched,
+    getState: () => state,
+    dispatch: (action: unknown) => {
+      dispatched.push(action);
+      return action;
+    },
+    subscribe: () => () => {},
+  };
+}
+
+/**
+ * A wrapper providing a store, for `renderHook`.
+ *
+ * @param state The store's whole state.
+ * @returns The wrapper component.
+ */
+export function storeWrapper(state: Record<string, unknown> = {}) {
+  const store = mockStore(state);
+  const StoreWrapper = ({ children }: { children: ReactNode }) => (
+    <Provider store={store as never}>{children}</Provider>
+  );
+  return StoreWrapper;
+}
+
+/**
+ * Render as `render` does, inside a store as well.
+ *
+ * @param ui The element under test.
+ * @param state The store's whole state.
+ * @param options Testing Library's own options.
+ * @returns What `render` returns, and the store.
+ */
+export function renderWithStore(
+  ui: ReactElement,
+  state: Record<string, unknown> = {},
+  options?: RenderOptions,
+) {
+  const store = mockStore(state);
+  const result = render(
+    <Provider store={store as never}>{ui}</Provider>,
+    options,
+  );
+  return { ...result, store };
+}
 
 export * from '@testing-library/react';

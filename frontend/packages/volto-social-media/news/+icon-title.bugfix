@@ -1,0 +1,1 @@
+A social network icon given a title carries it as the SVG's title, and one without is hidden from screen readers; the attributes it set before never reached the SVG. @ericof

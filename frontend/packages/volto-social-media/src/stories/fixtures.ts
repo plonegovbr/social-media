@@ -6,7 +6,10 @@
  * component can render what it will really be given.
  * @module stories/fixtures
  */
+import type { Content } from '@plone/types';
+import { SETTINGS_BEHAVIOR } from '../constants';
 import type { ItemSchema } from '../helpers/orderedList';
+import type { SocialMediaSettings } from '../types';
 
 /**
  * One social link, as the `socialMedia` schema utility describes it.
@@ -71,6 +74,49 @@ export const SOCIAL_LINKS = [
     ],
   },
 ];
+
+/** A site's social media settings, linking to `SOCIAL_LINKS`. */
+export const SOCIAL_MEDIA_SETTINGS: SocialMediaSettings = {
+  share_social_data: true,
+  facebook_app_id: '',
+  facebook_username: '',
+  x_username: '',
+  social_links: SOCIAL_LINKS,
+};
+
+/**
+ * The store state of a page on a site with social media settings.
+ *
+ * The content carries the settings as the `inherit` expansion serves them,
+ * and the form holds what an open content edit form would.
+ *
+ * @param settings Settings to replace.
+ * @param form What the content edit form holds.
+ * @returns The state.
+ */
+export function siteState(
+  settings: Partial<SocialMediaSettings> = {},
+  form: Record<string, unknown> = {},
+) {
+  return {
+    content: {
+      data: {
+        '@id': 'http://localhost:8080/Plone/news',
+        '@components': {
+          inherit: {
+            [SETTINGS_BEHAVIOR]: {
+              from: { '@id': 'http://localhost:8080/Plone', title: 'Plone' },
+              data: { ...SOCIAL_MEDIA_SETTINGS, ...settings },
+            },
+          },
+        },
+      } as unknown as Content,
+    },
+    form: { global: form },
+    router: { location: { pathname: '/news' } },
+    userSession: { token: null },
+  };
+}
 
 /**
  * Volto's lazy libraries, loaded for a store that cannot load them itself.

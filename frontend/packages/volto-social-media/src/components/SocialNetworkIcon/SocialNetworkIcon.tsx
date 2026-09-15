@@ -10,7 +10,10 @@ export interface SocialNetworkIconProps {
   size?: string;
   color?: string;
   className?: string;
-  /** Names the icon to a screen reader. Without one it is hidden from it. */
+  /**
+   * Names the icon, as the SVG's own title. Without one the icon is hidden
+   * from screen readers.
+   */
   title?: string;
   onClick?: (event: React.MouseEvent) => void;
   animate?: boolean;
@@ -43,8 +46,8 @@ const SocialNetworkIcon: React.FC<SocialNetworkIconProps> = ({
       className={cx(className, 'social-network', id, {
         animate: animate,
       })}
-      aria-label={title}
-      aria-hidden={!title}
+      title={title}
+      ariaHidden={!title}
       onClick={onClick}
     />
   );
