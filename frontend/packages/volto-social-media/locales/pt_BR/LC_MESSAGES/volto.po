@@ -16,15 +16,20 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
-#. Default: "Add"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Add (object list)"
-msgstr ""
+#. Default: "Actions"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Actions"
+msgstr "Ações"
 
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add social media profile"
 msgstr "Adicionar link"
+
+#. Default: "Add {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Add {item}"
+msgstr "Adicionar {item}"
 
 #. Default: "Align"
 #: messages
@@ -36,15 +41,26 @@ msgstr "Alinhamento"
 msgid "Animate Icon"
 msgstr "Animar ícone"
 
-#. Default: "Collapse item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Collapse item"
-msgstr ""
+#. Default: "Cancel"
+#: components/ConfirmModal/ConfirmModal
+msgid "Cancel"
+msgstr "Cancelar"
 
-#. Default: "Empty object list"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Empty object list"
-msgstr ""
+#. Default: "Delete"
+#: components/ConfirmModal/ConfirmModal
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Delete"
+msgstr "Excluir"
+
+#. Default: "Edit"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit"
+msgstr "Editar"
+
+#. Default: "Edit {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit {item}"
+msgstr "Editar {item}"
 
 #. Default: "Follow Us"
 #: components/Blocks/FollowUs/Data
@@ -66,6 +82,11 @@ msgstr "Chamada"
 msgid "Link"
 msgstr "Link"
 
+#. Default: "Move {title}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Move {title}"
+msgstr "Mover {title}"
+
 #. Default: "Network"
 #: components/Widgets/schema/socialMediaSchema
 #: messages
@@ -82,15 +103,10 @@ msgstr "Redes sociais"
 msgid "Open in a new tab"
 msgstr "Abrir em nova aba"
 
-#. Default: "Remove item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Remove item"
-msgstr ""
-
-#. Default: "Show item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Show item"
-msgstr ""
+#. Default: "Order"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Order"
+msgstr "Ordem"
 
 #. Default: "Target"
 #: components/Widgets/schema/socialMediaSchema
@@ -101,3 +117,13 @@ msgstr "Alvo"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Title"
 msgstr "Título"
+
+#. Default: "Remove this entry from the list? It is gone once the form is saved."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-confirm-delete"
+msgstr "Remover esta entrada da lista? Ela desaparece assim que o formulário é salvo."
+
+#. Default: "Nothing has been added yet."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-empty"
+msgstr "Nada foi adicionado ainda."

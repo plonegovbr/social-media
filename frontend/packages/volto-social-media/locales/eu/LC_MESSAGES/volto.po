@@ -17,15 +17,20 @@ msgstr ""
 "Domain: volto\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. Default: "Add"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Add (object list)"
+#. Default: "Actions"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Actions"
 msgstr ""
 
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add social media profile"
 msgstr "Gehitu sare sozialetako profila"
+
+#. Default: "Add {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Add {item}"
+msgstr ""
 
 #. Default: "Align"
 #: messages
@@ -37,14 +42,25 @@ msgstr "Alineazioa"
 msgid "Animate Icon"
 msgstr "Ikono animatua"
 
-#. Default: "Collapse item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Collapse item"
+#. Default: "Cancel"
+#: components/ConfirmModal/ConfirmModal
+msgid "Cancel"
 msgstr ""
 
-#. Default: "Empty object list"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Empty object list"
+#. Default: "Delete"
+#: components/ConfirmModal/ConfirmModal
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Delete"
+msgstr ""
+
+#. Default: "Edit"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit"
+msgstr ""
+
+#. Default: "Edit {item}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Edit {item}"
 msgstr ""
 
 #. Default: "Follow Us"
@@ -67,6 +83,11 @@ msgstr "Goiburukoa"
 msgid "Link"
 msgstr "Esteka"
 
+#. Default: "Move {title}"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Move {title}"
+msgstr ""
+
 #. Default: "Network"
 #: components/Widgets/schema/socialMediaSchema
 #: messages
@@ -83,14 +104,9 @@ msgstr "Sareak"
 msgid "Open in a new tab"
 msgstr "Ireki fitxa berrian"
 
-#. Default: "Remove item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Remove item"
-msgstr ""
-
-#. Default: "Show item"
-#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
-msgid "Show item"
+#. Default: "Order"
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "Order"
 msgstr ""
 
 #. Default: "Target"
@@ -102,3 +118,13 @@ msgstr "Helburua"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Title"
 msgstr "Izenburua"
+
+#. Default: "Remove this entry from the list? It is gone once the form is saved."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-confirm-delete"
+msgstr ""
+
+#. Default: "Nothing has been added yet."
+#: components/Widgets/OrderedListTable/OrderedListTable
+msgid "ordered-list-empty"
+msgstr ""

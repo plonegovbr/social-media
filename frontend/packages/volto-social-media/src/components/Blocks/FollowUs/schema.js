@@ -54,6 +54,9 @@ export const followUsSchema = (props) => {
       allowedNetworks: {
         title: intl.formatMessage(messages.FollowUsNetworks),
         widget: 'social_media_object_list',
+        // A network is all an entry here has; the widget's default columns
+        // also ask for a title.
+        columns: ['id'],
         schema: NetworkSchema({ intl, allowedNetworks }),
         default: [],
       },
