@@ -20,12 +20,17 @@
     "access": "public"
   },
   "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
     "dry-release": "release-it --dry-run",
     "release": "release-it",
     "release-major-alpha": "release-it major --preRelease=alpha",
     "release-alpha": "release-it --preRelease=alpha"
   },
+  "addons": [],
+  "theme": "",
   "dependencies": {
     "@plone/components": "workspace:*",
     "react-aria-components": "^1.4.1",
@@ -35,17 +40,24 @@
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^3.12.1",
+    "react-redux": "^8.1.2"
   },
   "devDependencies": {
-    "@plone/scripts": "^3.6.2",
+    "@plone/registry": "workspace:*",
+    "@plone/scripts": "workspace:*",
     "@plone/types": "workspace:*",
-    "@types/jest": "^29.5.8",
+    "@testing-library/react": "^16.2.0",
     "@types/lodash": "^4.14.201",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "react-intl": "^3.12.1",
-    "release-it": "^17.7.0"
+    "jsdom": "^25.0.1",
+    "react-intl": "3.12.1",
+    "react-redux": "8.1.2",
+    "release-it": "^19.0.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.1.2"
   }
 }

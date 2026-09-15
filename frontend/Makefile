@@ -21,16 +21,21 @@ YELLOW=`tput setaf 3`
 
 REPOSITORY_SETTINGS := $(shell uvx repoplone settings dump)
 
-VOLTO_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.volto_version')
-PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
-
 DOCKER_IMAGE=plone/server-dev:${PLONE_VERSION}
 DOCKER_IMAGE_ACCEPTANCE=plone/server-acceptance:${PLONE_VERSION}
 
 ADDON_NAME := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.name')
 IMAGE_NAME_PREFIX := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.container_images_prefix')
+IMAGE_NAME_SEPARATOR := -
+IMAGE_NAME_PREFIX_WITH_SEPARATOR := $(IMAGE_NAME_PREFIX)$(IMAGE_NAME_SEPARATOR)
 
 IMAGE_TAG=latest
+IMAGE_NAME=$(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend:$(IMAGE_TAG)
+
+# Environment variables to be exported
+export VOLTO_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.frontend.volto_version')
+export PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
+
 
 .PHONY: help
 help: ## Show this help
@@ -38,10 +43,10 @@ help: ## Show this help
 
 .PHONY: debug-settings
 debug-settings:  ## Debug settings
-	@echo "ADDON_NAME: $(ADDON_NAME)"
-	@echo "IMAGE_NAME_PREFIX: $(IMAGE_NAME_PREFIX)"
 	@echo "VOLTO_VERSION: $(VOLTO_VERSION)"
 	@echo "PLONE_VERSION: $(PLONE_VERSION)"
+	@echo "ADDON_NAME: $(ADDON_NAME)"
+	@echo "IMAGE_NAME: $(IMAGE_NAME)"
 
 # Dev Helpers
 .PHONY: clean
@@ -108,7 +113,7 @@ test: ## Run unit tests
 ci-test: ## Run unit tests in CI
 	# Unit Tests need the i18n to be built
 	VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto i18n
-	CI=1 RAZZLE_JEST_CONFIG=$(CURRENT_DIR)/jest-addon.config.js pnpm --filter @plone/volto test -- --passWithNoTests
+	CI=1 pnpm run test --passWithNoTests
 
 .PHONY: backend-docker-start
 backend-docker-start:	## Starts a Docker-based backend for development

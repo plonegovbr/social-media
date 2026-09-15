@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Add"
+#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
+msgid "Add (object list)"
+msgstr ""
+
 #. Default: "Add link"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Add social media profile"
@@ -25,6 +30,16 @@ msgstr "Ausrichtung"
 #: messages
 msgid "Animate Icon"
 msgstr "Symbol animieren"
+
+#. Default: "Collapse item"
+#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
+msgid "Collapse item"
+msgstr ""
+
+#. Default: "Empty object list"
+#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
+msgid "Empty object list"
+msgstr ""
 
 #. Default: "Follow Us"
 #: components/Blocks/FollowUs/Data
@@ -61,6 +76,16 @@ msgstr "Netzwerke"
 #: components/Widgets/schema/socialMediaSchema
 msgid "Open in a new tab"
 msgstr "In neuem Tab öffnen"
+
+#. Default: "Remove item"
+#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
+msgid "Remove item"
+msgstr ""
+
+#. Default: "Show item"
+#: components/Widgets/SocialMediaObjectList/SocialMediaObjectList
+msgid "Show item"
+msgstr ""
 
 #. Default: "Target"
 #: components/Widgets/schema/socialMediaSchema
