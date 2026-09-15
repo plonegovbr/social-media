@@ -1,4 +1,5 @@
 from plonegovbr.socialmedia import PACKAGE_NAME
+from Products.CMFPlone.PloneControlPanel import PloneControlPanel
 from Products.CMFPlone.TypesTool import TypesTool
 
 import pytest
@@ -18,6 +19,13 @@ class TestSetupUninstall:
         from plonegovbr.socialmedia.interfaces import IBrowserLayer
 
         assert IBrowserLayer not in browser_layers
+
+    def test_configlet_visible(self, portal):
+        """Test if Plone's socialmedia control panel is visible again."""
+        controlpanel: PloneControlPanel = portal.portal_controlpanel
+        actions = {a.getAction(portal)["id"]: a for a in controlpanel.listActions()}
+        assert "socialmedia" in actions
+        assert bool(actions["socialmedia"].visible) is True
 
 
 class TestSetupBehavior:

@@ -60,8 +60,9 @@ It applies the following.
 
 -   Removes the browser layer.
 -   Removes the `plonegovbr.socialmedia.settings` behavior from the `Plone Site` content type.
+-   Makes the `socialmedia` action of the Plone control panel visible again, as Plone defines it.
 
-It does not make the `socialmedia` control panel action visible again.
+Plone's own **Social Media** control panel is back in {guilabel}`Site Setup`.
 
 A `HiddenProfiles` utility hides this profile from the site creation form and from the add-ons control panel.
 
