@@ -322,7 +322,7 @@ Volto collects each add-on's `theme/_main.scss` into the module `addonsThemeCust
 |---|---|---|
 | `--social-network-icon-color-main` | `#000` | The `color` of `.social-network.icon` |
 | `--social-network-icon-color-hover` | `#000` | The `color` of `.social-network.icon` on hover |
-| `--social-network-background-color-main` | Not defined | The `background-color` of `.social-network.item` |
+| `--social-network-background-main` | `transparent` | The `background-color` of `.social-network.item` |
 | `--social-network-background-hover` | `transparent` | The `background-color` of `.social-network.item` on hover |
 | `--social-network-animation-transform` | `translateY(-2px)` | The `transform` of an animated icon on hover |
 | `--social-network-animation-transition` | `all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)` | The transition of an animated icon on hover |
@@ -330,5 +330,4 @@ Volto collects each add-on's `theme/_main.scss` into the module `addonsThemeCust
 
 Volto's `Icon` fills an SVG with `currentColor` when no `color` prop is given, so the icon's `color` is its fill.
 
-The `:root` rule also defines `--social-network-background-main`, which no rule reads.
 `FooterLinks` sets `--block-alignment` to `left` on its container.
