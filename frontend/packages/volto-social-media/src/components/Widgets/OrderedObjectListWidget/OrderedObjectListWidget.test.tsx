@@ -10,7 +10,7 @@ import OrderedObjectListWidget, {
   SocialLinksWidget,
 } from './OrderedObjectListWidget';
 import installNetworks from '../../../config/networks';
-import installWidgets from '../../../config/widgets';
+import { socialMediaSchema } from '../schema/socialMediaSchema';
 import { SOCIAL_LINK_SCHEMA, SOCIAL_LINKS } from '../../../stories/fixtures';
 
 let widgets: any;
@@ -174,7 +174,11 @@ describe('SocialLinksWidget', () => {
     // What `plonegovbr.socialmedia` sends for `social_links`: no schema, only
     // the name of the utility this package registers.
     installNetworks(config as any);
-    installWidgets(config as any);
+    config.registerUtility({
+      name: 'socialMedia',
+      type: 'schema',
+      method: socialMediaSchema,
+    });
 
     renderWidget(
       { schema: undefined, schemaName: 'socialMedia' },
