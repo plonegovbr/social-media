@@ -16,21 +16,23 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Web Environment",
-    "Framework :: Plone","Framework :: Plone :: 6.1",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.1",
+    "Framework :: Plone :: 6.2",
     "Framework :: Plone :: Addon",
-    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     "Operating System :: OS Independent",
-    "Programming Language :: Python","Programming Language :: Python :: 3.10",
-    "Programming Language :: Python","Programming Language :: Python :: 3.11",
-    "Programming Language :: Python","Programming Language :: Python :: 3.12",
-    "Programming Language :: Python","Programming Language :: Python :: 3.13",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "Products.CMFPlone",
     "plone.api",
     "plone.restapi",
     "plone.volto",
-    "plone.exportimport",
 ]
 
 [project.optional-dependencies]
@@ -40,7 +42,8 @@ test = [
     "plone.restapi[test]",
     "pytest",
     "pytest-cov",
-    "pytest-plone>=1.0.0a1",
+    "pytest-plone>=1.1.0",
+    "mypy",
 ]
 
 [project.urls]
@@ -172,6 +175,12 @@ ignore = [
     "dependabot.yml",
     "mx.ini",
 ]
+
+[tool.mypy]
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = "src"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
