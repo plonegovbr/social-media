@@ -38,7 +38,7 @@ The package's metadata declares `Framework :: Plone :: 6.1` and `Framework :: Pl
 
 ## Frontend
 
-Code analysis, internationalization checks, and unit tests for the frontend run against the following versions.
+Code analysis, type checks, internationalization checks, and unit tests for the frontend run against the following versions.
 
 | Dependency | Version |
 |---|---|

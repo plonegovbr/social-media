@@ -1,0 +1,1 @@
+Check the add-on's types in `make lint`, and so in CI, leaving out tests and stories, which the previous exclude patterns did not. @ericof

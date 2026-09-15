@@ -77,10 +77,11 @@ make test-coverage
 ```
 
 To check the types of the frontend add-on, run the following commands.
+The check leaves out tests and stories.
 
 ```shell
 cd frontend
-pnpm --filter @plonegovbr/volto-social-media typecheck
+pnpm typecheck
 ```
 
 ## Format and lint
@@ -89,6 +90,8 @@ pnpm --filter @plonegovbr/volto-social-media typecheck
 make format
 make lint
 ```
+
+`make lint` also checks the types of the frontend add-on, as continuous integration does.
 
 ## Storybook
 
