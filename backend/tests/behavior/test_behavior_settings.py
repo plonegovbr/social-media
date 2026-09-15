@@ -1,6 +1,8 @@
 from plonegovbr.socialmedia import PACKAGE_NAME
+from plonegovbr.socialmedia import utils
 
 import pytest
+import transaction
 
 
 class TestBehaviorSettings:
@@ -59,6 +61,19 @@ class TestBehaviorSettings:
         assert behavior_data["x_username"] == "plone"
         # Facebook is no longer linked
         assert behavior_data["facebook_username"] == ""
+
+    def test_add_social_link_from_python(self, portal, manager_request):
+        links, added = utils.add_social_link(
+            portal.social_links, "github", "https://github.com/plonegovbr", "GitHub"
+        )
+        assert added is True
+        portal.social_links = links
+        transaction.commit()
+        social_links = self.behavior_data(manager_request)["social_links"]
+        assert len(social_links) == 5
+        assert social_links[-1] == utils.create_social_link(
+            "github", "https://github.com/plonegovbr", "GitHub"
+        )
 
     @pytest.mark.parametrize("portal_type", ("Plone Site",))
     def test_types_endpoint(self, manager_request, portal_type: str):

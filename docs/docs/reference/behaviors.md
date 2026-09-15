@@ -94,7 +94,7 @@ Both behaviors store `social_links` as a JSON array of objects, in the order the
 
 | Key | Type | Description |
 |---|---|---|
-| `@id` | string | A unique id, which the widget gives every entry. |
+| `@id` | string | A unique id: a UUID the widget gives every entry, or the network's id for a link built by {ref}`reference-python-create`. |
 | `id` | string | The network: the name of a `socialNetwork` utility in the frontend. |
 | `title` | string | The link's title. |
 | `href` | array | The target, as a list of one object holding the address in `@id`, and optionally a `title`. |

@@ -24,6 +24,7 @@ For the reasoning behind any of it, read {doc}`/concepts/index`.
 
 behaviors
 rest-api
+python
 profiles
 ```
 

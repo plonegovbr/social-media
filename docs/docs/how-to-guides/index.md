@@ -35,6 +35,7 @@ install-the-frontend
 set-the-site-links
 give-a-section-its-own-links
 add-links-to-a-content-type
+add-a-link-from-python
 add-a-follow-us-block
 ```
 
