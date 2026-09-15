@@ -1,13 +1,77 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Helmet from '@plone/volto/helpers/Helmet/Helmet';
 import { toPublicURL, getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import { hasApiExpander } from '@plone/volto/helpers/Utils/Utils';
 import { getNavroot } from '@plone/volto/actions/navroot/navroot';
 import config from '@plone/volto/registry';
 import { useSocialMedia } from '../../hooks/useSocialMedia';
-import { useDispatch, useSelector } from 'react-redux';
 
-const ContentMetadataTags = (props) => {
+type ImageScale = {
+  download: string;
+  width: number;
+  height: number;
+};
+
+type ImageField =
+  | {
+      scales?: {
+        large?: ImageScale;
+      };
+    }
+  | null
+  | undefined;
+
+/** The fields of the content the tags are built from. */
+export interface MetadataContent {
+  '@id': string;
+  title?: string;
+  description?: string;
+  opengraph_title?: string;
+  opengraph_description?: string;
+  opengraph_image?: ImageField;
+  seo_title?: string;
+  seo_description?: string;
+  seo_canonical_url?: string;
+  seo_noindex?: boolean;
+  [field: string]: unknown;
+}
+
+export interface ContentMetadataTagsProps {
+  content: MetadataContent;
+}
+
+type State = {
+  router: {
+    location: {
+      pathname: string;
+    };
+  };
+  navroot?: {
+    data?: {
+      navroot?: {
+        title?: string;
+      };
+    };
+  };
+  site?: {
+    data?: Record<string, string | undefined>;
+  };
+};
+
+type ImageInfo = {
+  contentHasImage: string | false;
+  url: string | null;
+  height: number | null;
+  width: number | null;
+};
+
+type Action = Parameters<ReturnType<typeof useDispatch>>[0];
+
+/** Soft hyphens, which break long words in a heading but not in a tab. */
+const SOFT_HYPHENS = new RegExp(String.fromCharCode(0x00ad), 'g');
+
+const ContentMetadataTags: React.FC<ContentMetadataTagsProps> = (props) => {
   const {
     opengraph_title,
     opengraph_description,
@@ -20,55 +84,51 @@ const ContentMetadataTags = (props) => {
   } = props.content;
 
   const dispatch = useDispatch();
-  const pathname = useSelector((state) => state.router.location.pathname);
-  const navroot = useSelector((state) => state.navroot?.data?.navroot);
-  const site = useSelector((state) => state.site?.data);
+  const pathname = useSelector(
+    (state: State) => state.router.location.pathname,
+  );
+  const navroot = useSelector((state: State) => state.navroot?.data?.navroot);
+  const site = useSelector((state: State) => state.site?.data);
   const socialMediaSettings = useSocialMedia();
   const { share_social_data, facebook_app_id, facebook_username, x_username } =
     socialMediaSettings;
 
   useEffect(() => {
     if (pathname && !hasApiExpander('navroot', getBaseUrl(pathname))) {
-      dispatch(getNavroot(getBaseUrl(pathname)));
+      dispatch(getNavroot(getBaseUrl(pathname)) as Action);
     }
   }, [dispatch, pathname]);
 
-  const getContentImageInfo = () => {
+  const getContentImageInfo = (): ImageInfo => {
     const { contentMetadataTagsImageField } = config.settings;
-    const image = props.content[contentMetadataTagsImageField];
+    const image = props.content[contentMetadataTagsImageField] as ImageField;
     const { opengraph_image } = props.content;
 
-    const contentImageInfo = {
-      contentHasImage: false,
-      url: null,
-      height: null,
-      width: null,
-    };
-    contentImageInfo.contentHasImage =
+    const contentHasImage =
       opengraph_image?.scales?.large?.download ||
       image?.scales?.large?.download ||
       false;
+    // The Open Graph image wins over the content's own.
+    const large = contentHasImage
+      ? opengraph_image?.scales?.large ?? image?.scales?.large
+      : undefined;
 
-    if (contentImageInfo.contentHasImage && opengraph_image?.scales?.large) {
-      contentImageInfo.url = opengraph_image.scales.large.download;
-      contentImageInfo.height = opengraph_image.scales.large.height;
-      contentImageInfo.width = opengraph_image.scales.large.width;
-    } else if (contentImageInfo.contentHasImage) {
-      contentImageInfo.url = image.scales.large.download;
-      contentImageInfo.height = image.scales.large.height;
-      contentImageInfo.width = image.scales.large.width;
-    }
-
-    return contentImageInfo;
+    return {
+      contentHasImage,
+      url: large?.download ?? null,
+      height: large?.height ?? null,
+      width: large?.width ?? null,
+    };
   };
 
   const contentImageInfo = getContentImageInfo();
 
   const getTitle = () => {
-    const includeSiteTitle =
-      config?.settings?.siteTitleFormat?.includeSiteTitle || false;
+    // Volto keeps the separator in `siteTitleFormat`, beside the switch.
+    const { siteTitleFormat } = config.settings;
+    const includeSiteTitle = siteTitleFormat?.includeSiteTitle || false;
     const titleAndSiteTitleSeparator =
-      config?.settings?.titleAndSiteTitleSeparator || '-';
+      siteTitleFormat?.titleAndSiteTitleSeparator || '-';
     const navRootTitle = navroot?.title;
     const siteRootTitle = site?.['plone.site_title'];
     const titlePart = navRootTitle || siteRootTitle;
@@ -83,7 +143,7 @@ const ContentMetadataTags = (props) => {
   return (
     <>
       <Helmet>
-        <title>{getTitle()?.replace(/\u00AD/g, '')}</title>
+        <title>{getTitle()?.replace(SOFT_HYPHENS, '')}</title>
         <link
           rel="canonical"
           href={seo_canonical_url || toPublicURL(props.content['@id'])}
@@ -110,14 +170,20 @@ const ContentMetadataTags = (props) => {
         {contentImageInfo.contentHasImage && (
           <meta
             property="og:image"
-            content={toPublicURL(contentImageInfo.url)}
+            content={toPublicURL(contentImageInfo.url ?? '')}
           />
         )}
         {contentImageInfo.contentHasImage && (
-          <meta property="og:image:width" content={contentImageInfo.width} />
+          <meta
+            property="og:image:width"
+            content={String(contentImageInfo.width)}
+          />
         )}
         {contentImageInfo.contentHasImage && (
-          <meta property="og:image:height" content={contentImageInfo.height} />
+          <meta
+            property="og:image:height"
+            content={String(contentImageInfo.height)}
+          />
         )}
         {(opengraph_description || seo_description || description) && (
           <meta

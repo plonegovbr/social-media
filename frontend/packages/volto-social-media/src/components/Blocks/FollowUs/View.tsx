@@ -1,10 +1,18 @@
 import React from 'react';
 import cx from 'classnames';
 import { Container } from '@plone/components';
-import { useNetworks } from '@plonegovbr/volto-social-media/hooks/useNetworks';
-import SocialNetworks from '@plonegovbr/volto-social-media/components/SocialNetworks/SocialNetworks';
+import { useNetworks } from '../../../hooks/useNetworks';
+import SocialNetworks from '../../SocialNetworks/SocialNetworks';
+import type { FollowUsBlockData } from '../../../types';
 
-const View = ({ data, className, style }) => {
+export interface FollowUsViewProps {
+  data: FollowUsBlockData;
+  className?: string;
+  style?: React.CSSProperties;
+  isEditMode?: boolean;
+}
+
+const View: React.FC<FollowUsViewProps> = ({ data, className, style }) => {
   const { title, allowedNetworks } = data;
   const animate = data.animate !== undefined ? data.animate : true;
   const networks = useNetworks(allowedNetworks);

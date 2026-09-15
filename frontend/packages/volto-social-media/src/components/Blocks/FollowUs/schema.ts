@@ -1,7 +1,19 @@
+import type { IntlShape } from 'react-intl';
+import type { JSONSchema } from '@plone/types';
 import { addStyling } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
 import { messages } from '../../../messages';
+import type { SocialLink } from '../../../types';
 
-const NetworkSchema = ({ intl, allowedNetworks }) => ({
+/** The networks an editor can pick, as `[token, label]` choices. */
+type NetworkChoices = () => [string, string][];
+
+const NetworkSchema = ({
+  intl,
+  allowedNetworks,
+}: {
+  intl: IntlShape;
+  allowedNetworks: NetworkChoices;
+}): JSONSchema => ({
   title: intl.formatMessage(messages.Network),
   fieldsets: [
     {
@@ -20,13 +32,19 @@ const NetworkSchema = ({ intl, allowedNetworks }) => ({
   required: ['id'],
 });
 
-export const followUsSchema = (props) => {
+export type FollowUsSchemaProps = {
+  intl: IntlShape;
+  /** The site's links, which are the networks an editor can pick from. */
+  networks?: SocialLink[];
+};
+
+export const followUsSchema = (props: FollowUsSchemaProps): JSONSchema => {
   const { intl, networks } = props;
-  const allowedNetworks = () => {
+  const allowedNetworks: NetworkChoices = () => {
     const allNetworks = networks || [];
-    return allNetworks.map((item) => [item.id, item.title]);
+    return allNetworks.map((item) => [item.id, item.title || item.id]);
   };
-  const schema = {
+  const schema: JSONSchema = {
     title: intl.formatMessage(messages.FollowUsBlock),
     fieldsets: [
       {
@@ -43,11 +61,11 @@ export const followUsSchema = (props) => {
 
     properties: {
       title: {
-        title: props.intl.formatMessage(messages.FollowUsTitle),
+        title: intl.formatMessage(messages.FollowUsTitle),
         default: '',
       },
       animate: {
-        title: props.intl.formatMessage(messages.FollowUsAnimateIcon),
+        title: intl.formatMessage(messages.FollowUsAnimateIcon),
         type: 'boolean',
         default: false,
       },

@@ -1,10 +1,19 @@
 import React from 'react';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
-import { useNetworks } from '@plonegovbr/volto-social-media/hooks/useNetworks';
+import { useNetworks } from '../../../hooks/useNetworks';
 import Data from './Data';
 import View from './View';
+import type { FollowUsBlockData } from '../../../types';
 
-const Edit = (props) => {
+export interface FollowUsEditProps {
+  data: FollowUsBlockData;
+  block: string;
+  onChangeBlock: (block: string, data: FollowUsBlockData) => void;
+  selected: boolean;
+  [key: string]: unknown;
+}
+
+const Edit: React.FC<FollowUsEditProps> = (props) => {
   const { data, block, onChangeBlock, selected } = props;
   const networks = useNetworks();
   return (

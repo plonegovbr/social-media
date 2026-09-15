@@ -1,10 +1,18 @@
 import React from 'react';
 import cx from 'classnames';
 import SocialNetwork from '../SocialNetwork/SocialNetwork';
+import type { SocialLink } from '../../types';
 
-const SocialNetworks = (props) => {
-  const { networks, animate } = props;
+export interface SocialNetworksProps {
+  /** The links, in order. A link without a target is left out. */
+  networks: SocialLink[];
+  animate?: boolean;
+}
 
+const SocialNetworks: React.FC<SocialNetworksProps> = ({
+  networks,
+  animate,
+}) => {
   return (
     <ul className={cx('social-networks')}>
       {networks.map(function (network, index) {
