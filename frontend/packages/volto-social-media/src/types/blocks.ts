@@ -24,7 +24,12 @@ export interface FollowUsBlockData {
    */
   allowedNetworks?: AllowedNetwork[];
   styles?: {
-    'align:noprefix'?: string;
+    /**
+     * The block's alignment. The sidebar's default is the name `'left'`;
+     * Volto's `blockAlignment` widget stores the CSS custom properties of the
+     * alignment picked, such as `{ '--block-alignment': 'var(--align-center)' }`.
+     */
+    'align:noprefix'?: string | Record<`--${string}`, string>;
   };
 }
 

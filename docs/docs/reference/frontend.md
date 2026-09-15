@@ -188,7 +188,7 @@ A block stores a `FollowUsBlockData` object.
 | `title` | string | Default | `''` | The headline above the icons. |
 | `animate` | boolean | Default | `false` | Whether the icons move on hover. |
 | `allowedNetworks` | `AllowedNetwork[]` | Filter Networks | `[]` | The networks shown, in this order. |
-| `styles['align:noprefix']` | Set by the widget | Styling | `'left'` | The block's alignment, set with the `blockAlignment` widget. |
+| `styles['align:noprefix']` | string, or an object of CSS custom properties | Styling | `'left'` | The block's alignment, set with the `blockAlignment` widget. The widget stores the custom properties of the alignment picked, such as `{"--block-alignment": "var(--align-center)"}`. |
 
 The sidebar edits `allowedNetworks` with the `social_media_object_list` widget, showing the one column `id`.
 Its choices are the networks of the links the page inherits, not every registered network.
