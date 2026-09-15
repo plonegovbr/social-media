@@ -33,7 +33,7 @@
   "theme": "",
   "dependencies": {
     "@plone/components": "workspace:*",
-    "react-aria-components": "^1.4.1",
+    "react-aria-components": "catalog:",
     "classnames": "^2.5.1",
     "uuid": "^10.0.0",
     "react-animate-height": "^3.0.4",
