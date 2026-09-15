@@ -50,7 +50,8 @@ The frontend add-on turns these fields into meta tags, as {ref}`reference-fronte
 
 ### Computed usernames
 
-Each username is read from the first link whose `id` names its network, and from that link's first target.
+Each username is read from the first link whose `id` names its network and that has a target, and from the address of that target.
+A link without a target is skipped, as the frontend does not render it.
 
 | Field | Link `id` | Accepted target | Example |
 |---|---|---|---|

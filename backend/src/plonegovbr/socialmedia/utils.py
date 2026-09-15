@@ -11,11 +11,35 @@ PATTERNS = {
 }
 
 
+def link_target(link: dict) -> str:
+    """Return the address of a social link's first target.
+
+    The backend validates no key of a link, so a link written through the
+    REST API may have no target, or one of another shape.
+
+    :param link: A social link, as a ``social_links`` field stores it.
+    :returns: The ``@id`` of the link's first target, or an empty string when
+        the link has no such target.
+    """
+    targets = link.get("href")
+    if isinstance(targets, list) and targets and isinstance(targets[0], dict):
+        url = targets[0].get("@id")
+        return url if isinstance(url, str) else ""
+    return ""
+
+
 def filter_social_links(social_links: list[dict], network_id: str) -> dict | None:
-    """Given a list of social links, filter the first one with the given network_id."""
-    for network in social_links:
-        if network["id"] == network_id:
-            return network
+    """Return the first link to a network that has a target.
+
+    A link without a target is skipped, as the frontend does not render it.
+
+    :param social_links: The links, as a ``social_links`` field stores them.
+    :param network_id: The network's id, such as ``x``.
+    :returns: The link, or ``None`` when no link to the network has a target.
+    """
+    for link in social_links:
+        if link.get("id") == network_id and link_target(link):
+            return link
     return None
 
 
@@ -31,9 +55,14 @@ def extract_username_from_profile(profile: str, network_id: str) -> str:
 def extract_username_from_social_links(
     social_links: list[dict], network_id: str
 ) -> str:
-    """Given a list of social links, filter the first one with the given network_id."""
-    network_info = filter_social_links(social_links, network_id)
-    if network_info:
-        profile_url = network_info["href"][0]["@id"]
-        return extract_username_from_profile(profile_url, network_id)
+    """Return the username in the first link to a network that has a target.
+
+    :param social_links: The links, as a ``social_links`` field stores them.
+    :param network_id: The network's id, such as ``x``.
+    :returns: The username, or an empty string when no link to the network
+        has a target, or its target is not a profile address.
+    """
+    link = filter_social_links(social_links, network_id)
+    if link:
+        return extract_username_from_profile(link_target(link), network_id)
     return ""

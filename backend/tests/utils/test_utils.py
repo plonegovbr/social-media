@@ -55,6 +55,40 @@ def test_filter_social_links_first_match(social_links):
     assert result is social_links[0]
 
 
+def test_filter_social_links_skips_links_without_target(social_links):
+    func = utils.filter_social_links
+    untargeted = {"id": "x", "title": "Old X"}
+    result = func([untargeted, *social_links], "x")
+    assert result is social_links[0]
+
+
+@pytest.mark.parametrize(
+    "link",
+    [
+        {"id": "x", "title": "X"},
+        {"id": "x", "title": "X", "href": []},
+        {"id": "x", "title": "X", "href": [{"title": "x.com/plone"}]},
+        {"id": "x", "title": "X", "href": [{"@id": None}]},
+        {"id": "x", "title": "X", "href": ["https://x.com/plone"]},
+        {"id": "x", "title": "X", "href": "https://x.com/plone"},
+        {"title": "X", "href": [{"@id": "https://x.com/plone"}]},
+    ],
+    ids=[
+        "no-href",
+        "empty-href",
+        "target-without-id",
+        "id-not-a-string",
+        "target-not-an-object",
+        "href-not-a-list",
+        "no-network",
+    ],
+)
+def test_extract_username_from_social_links_without_target(link: dict):
+    func = utils.extract_username_from_social_links
+    result = func([link], "x")
+    assert result == ""
+
+
 @pytest.mark.parametrize(
     "network_id,expected",
     [
@@ -72,3 +106,12 @@ def test_extract_username_from_social_links(
     func = utils.extract_username_from_social_links
     result = func(social_links, network_id)
     assert result == expected
+
+
+def test_extract_username_from_social_links_skips_links_without_target(
+    social_links,
+):
+    func = utils.extract_username_from_social_links
+    untargeted = {"id": "x", "title": "Old X"}
+    result = func([untargeted, *social_links], "x")
+    assert result == "ploneorgbr"
