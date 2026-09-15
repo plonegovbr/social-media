@@ -8,6 +8,49 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0 (2026-09-15)
+
+
+### Feature
+
+- Show the `social_links` field on content views as the same icons the Follow Us block shows, when the content type has no view of its own. @ericof [#20](https://github.com/plonegovbr/social-media/issues/20)
+- The default title when addind a new link is the name of the SocialNetWork + Added a Icon next to title of the network. @humanaice [#21](https://github.com/plonegovbr/social-media/issues/21)
+- Add Spanish translation @erral 
+- Make the title of a social link optional: a link saved without one takes its network's name. @ericof 
+- Offer the networks of a social link from a client-side vocabulary of the registered `socialNetwork` utilities, ordered by title, and show each link's network by its icon in the social links widget. @ericof 
+- Replace the social links widget with a table: links are reordered by dragging, edited in a dialog, and deleted after a confirmation. @ericof 
+
+
+### Bugfix
+
+- Fix social media icon color @iRohitSingh [#19](https://github.com/plonegovbr/social-media/issues/19)
+- A link to a network with no registered `socialNetwork` utility no longer breaks the page it is shown on. @ericof 
+- A social network icon given a title carries it as the SVG's title, and one without is hidden from screen readers; the attributes it set before never reached the SVG. @ericof 
+- Fit the social links widget to its place: pad the table's sides on content forms, and in the sidebar drop the padding, the borders of its buttons, and the visible label of the network column. @ericof 
+- Page titles use the separator configured in `config.settings.siteTitleFormat`. @ericof 
+- Pick the network of a social link, and of a Follow Us block, from a select again: the dialog of the table widget rendered the `id` field with Volto's short name widget. @ericof 
+- Style the link background and the footer links through the custom property and the class the components use; both rules pointed at names nothing set. @ericof 
+
+
+### Internal
+
+- Add Storybook stories for every component, rendered inside Volto's storybook `Wrapper`. @ericof 
+- Check the add-on's types in `make lint`, and so in CI, leaving out tests and stories, which the previous exclude patterns did not. @ericof 
+- Convert the add-on to TypeScript, with its shared types in `src/types`. @ericof 
+- Run unit tests with Vitest, use pnpm 10, and align the add-on tooling with the cookieplone templates. @ericof 
+- Type a Follow Us block's alignment as what Volto's alignment widget stores: a name, or an object of CSS custom properties. @ericof 
+- Updated SocialNetworkIcon to ajust to have better accessebility. @humanaice 
+
+
+### Documentation
+
+- Rewrite the README to match the documentation. @ericof 
+
+
+### Tests
+
+- Add Vitest tests for every component, hook, schema and configuration step of the add-on. @ericof 
+
 ## 3.0.0-alpha.0 (2025-11-11)
 
 ### Breaking

@@ -9,6 +9,43 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0 (2026-09-15)
+
+
+### Breaking changes:
+
+- Drop support for Python 3.10. @ericof 
+
+
+### New features:
+
+- Add a social_links metadata column to the catalog, and add it to every summary the REST API returns for a catalog result. An existing site needs the upgrade step to profile version 1001. @ericof 
+- Add create_social_link, add_social_link, and cleanse_social_links to plonegovbr.socialmedia.utils, to build, add, and merge social links from Python. @ericof 
+- Add support for Plone 6.2 and Python 3.14. @ericof 
+
+
+### Bug fixes:
+
+- Compute the X and Facebook usernames from the first link to the network that has a target, instead of failing on a link without one. @ericof 
+- Show Plone's Social Media control panel again when the add-on is uninstalled. @ericof 
+
+
+### Internal:
+
+- Updatede widget so social Media uses its own Object List. @humanaice [#21](https://github.com/plonegovbr/social-media/issues/21)
+- Declare the widget of the `social_links` field after the field, in both behaviors. @ericof 
+- Use pytest-plone 1.1.0, type check with mypy and plone-stubs, and align the backend tooling with the cookieplone templates. @ericof 
+
+
+### Documentation:
+
+- Rewrite the README to match the documentation. @ericof 
+
+
+### Tests
+
+- Test updating the site's social media settings through the REST API, and the helpers that read usernames from social links. @ericof 
+
 ## 3.0.0a0 (2025-11-11)
 
 

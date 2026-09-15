@@ -7,6 +7,108 @@
 -->
 
 <!-- towncrier release notes start -->
+## 3.0.0 (2026-09-15)
+
+### Backend
+
+
+#### Breaking changes:
+
+- Drop support for Python 3.10. @ericof 
+
+
+#### New features:
+
+- Add a social_links metadata column to the catalog, and add it to every summary the REST API returns for a catalog result. An existing site needs the upgrade step to profile version 1001. @ericof 
+- Add create_social_link, add_social_link, and cleanse_social_links to plonegovbr.socialmedia.utils, to build, add, and merge social links from Python. @ericof 
+- Add support for Plone 6.2 and Python 3.14. @ericof 
+
+
+#### Bug fixes:
+
+- Compute the X and Facebook usernames from the first link to the network that has a target, instead of failing on a link without one. @ericof 
+- Show Plone's Social Media control panel again when the add-on is uninstalled. @ericof 
+
+
+#### Internal:
+
+- Updatede widget so social Media uses its own Object List. @humanaice [#21](https://github.com/plonegovbr/social-media/issues/21)
+- Declare the widget of the `social_links` field after the field, in both behaviors. @ericof 
+- Use pytest-plone 1.1.0, type check with mypy and plone-stubs, and align the backend tooling with the cookieplone templates. @ericof 
+
+
+#### Documentation:
+
+- Rewrite the README to match the documentation. @ericof 
+
+
+#### Tests
+
+- Test updating the site's social media settings through the REST API, and the helpers that read usernames from social links. @ericof 
+
+
+
+### Frontend
+
+
+#### Feature
+
+- Show the `social_links` field on content views as the same icons the Follow Us block shows, when the content type has no view of its own. @ericof [#20](https://github.com/plonegovbr/social-media/issues/20)
+- The default title when addind a new link is the name of the SocialNetWork + Added a Icon next to title of the network. @humanaice [#21](https://github.com/plonegovbr/social-media/issues/21)
+- Add Spanish translation @erral 
+- Make the title of a social link optional: a link saved without one takes its network's name. @ericof 
+- Offer the networks of a social link from a client-side vocabulary of the registered `socialNetwork` utilities, ordered by title, and show each link's network by its icon in the social links widget. @ericof 
+- Replace the social links widget with a table: links are reordered by dragging, edited in a dialog, and deleted after a confirmation. @ericof 
+
+
+#### Bugfix
+
+- Fix social media icon color @iRohitSingh [#19](https://github.com/plonegovbr/social-media/issues/19)
+- A link to a network with no registered `socialNetwork` utility no longer breaks the page it is shown on. @ericof 
+- A social network icon given a title carries it as the SVG's title, and one without is hidden from screen readers; the attributes it set before never reached the SVG. @ericof 
+- Fit the social links widget to its place: pad the table's sides on content forms, and in the sidebar drop the padding, the borders of its buttons, and the visible label of the network column. @ericof 
+- Page titles use the separator configured in `config.settings.siteTitleFormat`. @ericof 
+- Pick the network of a social link, and of a Follow Us block, from a select again: the dialog of the table widget rendered the `id` field with Volto's short name widget. @ericof 
+- Style the link background and the footer links through the custom property and the class the components use; both rules pointed at names nothing set. @ericof 
+
+
+#### Internal
+
+- Add Storybook stories for every component, rendered inside Volto's storybook `Wrapper`. @ericof 
+- Check the add-on's types in `make lint`, and so in CI, leaving out tests and stories, which the previous exclude patterns did not. @ericof 
+- Convert the add-on to TypeScript, with its shared types in `src/types`. @ericof 
+- Run unit tests with Vitest, use pnpm 10, and align the add-on tooling with the cookieplone templates. @ericof 
+- Type a Follow Us block's alignment as what Volto's alignment widget stores: a name, or an object of CSS custom properties. @ericof 
+- Updated SocialNetworkIcon to ajust to have better accessebility. @humanaice 
+
+
+#### Documentation
+
+- Rewrite the README to match the documentation. @ericof 
+
+
+#### Tests
+
+- Add Vitest tests for every component, hook, schema and configuration step of the add-on. @ericof 
+
+
+
+### Project
+
+
+#### Internal
+
+- Update GitHub Actions workflows to the current monorepo layout: move `dependabot.yml` under `.github`, compute paths and changelog scopes in `config.yml`, and test the backend against Plone 6.1 and 6.2 on Python 3.11 to 3.14. @ericof 
+
+
+#### Documentation
+
+- Document both packages with a tutorial, how-to guides, concepts, and a reference. @ericof 
+- Document the network vocabulary, the optional link title, the network icons of the social links widget, and how its dialog picks the widget of a field. @ericof 
+- Publish the documentation and Storybook to GitHub Pages, replacing the unused Read the Docs configuration. @ericof 
+
+
+
 ## 3.0.0a0 (2025-11-11)
 
 ### Backend
