@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    >
+
+  <!-- Listings read each item's links from the catalog now, which needs a
+       metadata column that did not exist. Re-importing the catalog step
+       creates it empty; the handler is what fills it. See the module
+       docstring. -->
+  <genericsetup:upgradeSteps
+      profile="plonegovbr.socialmedia:default"
+      source="1000"
+      destination="1001"
+      >
+    <genericsetup:upgradeStep
+        title="Add the social_links catalog metadata"
+        description="Adds the social_links metadata column to the catalog, and fills it for every object that can hold social links, so listings return each item's links."
+        handler=".add_social_links_column"
+        />
+  </genericsetup:upgradeSteps>
+
+</configure>

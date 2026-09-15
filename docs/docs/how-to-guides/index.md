@@ -25,6 +25,7 @@ Do these two in order.
 
 install
 install-the-frontend
+upgrade
 ```
 
 ## Managing links

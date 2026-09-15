@@ -5,6 +5,7 @@ Follow Us
 Gitlab
 monorepo
 pnpm
+[Rr]eindex(es|ed|ing)?
 Soundcloud
 Spotify
 Xing

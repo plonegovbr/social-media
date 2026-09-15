@@ -18,7 +18,7 @@ The object must have one of the two behaviors {doc}`/reference/behaviors` lists.
 ## Add one link
 
 Pass the object's links, the network, the address, and the title to `add_social_link`.
-When it added the link, assign the links it returns to the object.
+When it added the link, assign the links it returns to the object, and reindex the object, so that listings show the new link.
 
 ```python
 from plone import api
@@ -30,6 +30,7 @@ links, added = add_social_link(
 )
 if added:
     portal.social_links = links
+    portal.reindexObject()
 ```
 
 The site now links to its GitHub organization, after its other links.
@@ -54,6 +55,7 @@ imported = [
 links, changed = cleanse_social_links(speaker.social_links, sources=[imported])
 if changed:
     speaker.social_links = links
+    speaker.reindexObject()
 ```
 
 A network the speaker already links to keeps its stored link.

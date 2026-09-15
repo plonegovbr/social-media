@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="portal_catalog">
+  <column remove="True"
+          value="social_links"
+  />
+</object>

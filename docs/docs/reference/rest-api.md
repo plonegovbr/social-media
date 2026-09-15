@@ -150,6 +150,93 @@ Accept: application/json
 
 A `PATCH` to the object with a `social_links` key replaces the whole list.
 
+(reference-rest-api-summary)=
+
+## Summaries of catalog results
+
+Every summary of a catalog result carries `social_links`, read from the metadata column {doc}`catalog` describes.
+That covers the results of `@search` and `@querystring-search`, and the items of a folder.
+
+```http
+GET /Plone/@search?portal_type=Document HTTP/1.1
+Accept: application/json
+```
+
+```json
+{
+  "@id": "http://localhost:8080/Plone/@search?portal_type=Document",
+  "items": [
+    {
+      "@id": "http://localhost:8080/Plone/profiles",
+      "@type": "Document",
+      "description": "Visit our social media profiles",
+      "effective": "2025-04-17T18:53:00+00:00",
+      "end": null,
+      "getObjSize": "0 KB",
+      "getRemoteUrl": null,
+      "head_title": null,
+      "image_field": "",
+      "image_scales": null,
+      "mime_type": "text/plain",
+      "nav_title": null,
+      "review_state": "published",
+      "social_links": [
+        {
+          "@id": "7e90497e-3ef4-473c-b781-7d7767ab9f1a",
+          "href": [
+            {
+              "@id": "https://x.com/ploneorgbr",
+              "title": "x.com/ploneorgbr"
+            }
+          ],
+          "id": "x",
+          "title": "X"
+        },
+        {
+          "@id": "3892d3a9-6c9c-4f04-bee0-5d56b1f5523c",
+          "href": [
+            {
+              "@id": "https://bsky.app/profile/plone.org.br",
+              "title": "bsky.app/profile/plone.org.br"
+            }
+          ],
+          "id": "bluesky",
+          "title": "BlueSky"
+        },
+        {
+          "@id": "3822d3a9-6c9c-4f04-bee0-5d56b1f5523c",
+          "href": [
+            {
+              "@id": "https://facebook.com/PloneBr",
+              "title": "https://facebook.com/PloneBr"
+            }
+          ],
+          "id": "facebook",
+          "title": "Facebook"
+        },
+        {
+          "@id": "3827d3a9-6c9c-4f04-bee0-5d56b1f5523c",
+          "href": [
+            {
+              "@id": "https://instagram.com/plonebr",
+              "title": "https://instagram.com/plonebr"
+            }
+          ],
+          "id": "instagram",
+          "title": "Instagram"
+        }
+      ],
+      "start": null,
+      "title": "Profiles",
+      "type_title": "Page"
+    }
+  ],
+  "items_total": 1
+}
+```
+
+`social_links` is `null` in the summary of an object whose column holds nothing: an object with neither behavior, or with no links.
+
 ## Schemas
 
 `@types` lists each behavior's editable fields in the `social_media` fieldset.

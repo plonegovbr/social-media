@@ -27,6 +27,10 @@ class TestSetupUninstall:
         assert "socialmedia" in actions
         assert bool(actions["socialmedia"].visible) is True
 
+    def test_catalog_column_removed(self, portal):
+        """Test that the social_links metadata column is removed."""
+        assert "social_links" not in portal.portal_catalog.schema()
+
 
 class TestSetupBehavior:
     @pytest.fixture(autouse=True)

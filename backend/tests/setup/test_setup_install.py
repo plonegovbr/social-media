@@ -18,7 +18,11 @@ class TestSetupInstall:
 
     def test_latest_version(self, profile_last_version):
         """Test latest version of default profile."""
-        assert profile_last_version(f"{PACKAGE_NAME}:default") == "1000"
+        assert profile_last_version(f"{PACKAGE_NAME}:default") == "1001"
+
+    def test_catalog_column(self, portal):
+        """Test that the social_links metadata column is added."""
+        assert "social_links" in portal.portal_catalog.schema()
 
     def test_configlet_disabled(self, portal):
         """Test if socialmedia control panel is disabled."""

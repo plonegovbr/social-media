@@ -23,6 +23,7 @@ For the reasoning behind any of it, read {doc}`/concepts/index`.
 :maxdepth: 1
 
 behaviors
+catalog
 rest-api
 python
 profiles

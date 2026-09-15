@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="portal_catalog">
+  <!-- A copy of each object's social links, so a listing reads them off the
+       brain. See plonegovbr.socialmedia.indexers. -->
+  <column value="social_links" />
+</object>
