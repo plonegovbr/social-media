@@ -1,0 +1,65 @@
+{
+  "@id": "/profiles/human-being",
+  "@type": "person",
+  "UID": "748a40345983488eb4aff4efc95819d4",
+  "allow_discussion": null,
+  "contributors": [],
+  "created": "2026-09-15T20:12:06+00:00",
+  "creators": [
+    "admin"
+  ],
+  "description": "A human being",
+  "effective": null,
+  "expires": null,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "human-being",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "view",
+  "lock": {},
+  "modified": "2026-09-15T20:12:06+00:00",
+  "review_state": "private",
+  "rights": "",
+  "social_links": [
+    {
+      "@id": "1fe4e0d2-0399-4845-9b65-dbde630bd745",
+      "href": [
+        {
+          "@id": "https://bsky.app/profile/plone.org",
+          "title": "bsky.app/profile/plone.org"
+        }
+      ],
+      "id": "bluesky",
+      "title": "BlueSky"
+    },
+    {
+      "@id": "e868f3dc-61c2-4662-8117-83ad1e8324f8",
+      "href": [
+        {
+          "@id": "https://plone.org/",
+          "title": "plone.org/"
+        }
+      ],
+      "id": "website",
+      "title": "Website"
+    }
+  ],
+  "subjects": [],
+  "title": "Human Being",
+  "type_title": "Person",
+  "version": "current",
+  "workflow_history": {
+    "simple_publication_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-09-15T20:12:06+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

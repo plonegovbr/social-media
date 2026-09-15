@@ -3,11 +3,13 @@
   "_blob_files_": [],
   "_data_files_": [
     "plone_site_root/data.json",
-    "7267eca4af2f4d0ba7d24fec73bc2952/data.json"
+    "7267eca4af2f4d0ba7d24fec73bc2952/data.json",
+    "748a40345983488eb4aff4efc95819d4/data.json"
   ],
   "default_page": {},
   "local_permissions": {
     "7267eca4af2f4d0ba7d24fec73bc2952": {},
+    "748a40345983488eb4aff4efc95819d4": {},
     "plone_site_root": {
       "Add portal member": {
         "acquire": false,
@@ -69,6 +71,13 @@
         ]
       }
     },
+    "748a40345983488eb4aff4efc95819d4": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
     "plone_site_root": {
       "local_roles": {
         "admin": [
@@ -78,7 +87,8 @@
     }
   },
   "ordering": {
-    "7267eca4af2f4d0ba7d24fec73bc2952": 41
+    "7267eca4af2f4d0ba7d24fec73bc2952": 41,
+    "748a40345983488eb4aff4efc95819d4": 0
   },
   "relations": []
 }
