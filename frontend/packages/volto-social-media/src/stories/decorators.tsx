@@ -9,7 +9,7 @@
  * @module stories/decorators
  */
 import React from 'react';
-import type { Decorator, Loader } from '@storybook/react';
+import type { Decorator } from '@storybook/react';
 import Wrapper from '@plone/volto/storybook';
 
 import { loadLazyLibraries } from './fixtures';
@@ -29,16 +29,31 @@ export const withWrapper: Decorator = (Story, { loaded }) => (
 );
 
 /**
- * A loader putting Volto's lazy libraries in the story's store.
+ * A loader putting state in the story's store.
  *
- * `useLazyLibs` would dispatch them there once loaded, and the mock store
- * ignores that dispatch, so the story loads them first.
+ * Volto's lazy libraries go there too: `useLazyLibs` would dispatch them into
+ * the store once loaded, and the mock store ignores that dispatch, so the
+ * story loads them first.
+ *
+ * @param state The state to merge over Volto's initial one.
+ * @param lazyLibraries Names registered in `config.settings.loadables`.
+ * @returns The loader.
+ */
+export const withState =
+  (state: Record<string, unknown>, lazyLibraries: string[] = []) =>
+  async () => ({
+    customStore: {
+      ...state,
+      ...(lazyLibraries.length
+        ? { lazyLibraries: await loadLazyLibraries(lazyLibraries) }
+        : {}),
+    },
+  });
+
+/**
+ * A loader putting Volto's lazy libraries in the story's store.
  *
  * @param names Names registered in `config.settings.loadables`.
  * @returns The loader.
  */
-export const withLazyLibraries =
-  (names: string[]): Loader =>
-  async () => ({
-    customStore: { lazyLibraries: await loadLazyLibraries(names) },
-  });
+export const withLazyLibraries = (names: string[]) => withState({}, names);
