@@ -14,3 +14,26 @@ updates:
     labels:
       - "dependencies"
       - "skip changelog"
+
+  # The frontend: package.json and pnpm-lock.yaml. The npm ecosystem reads
+  # pnpm lockfiles, and the directory is the one that holds the lockfile.
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "skip changelog"
+
+  # The docs: pyproject.toml and uv.lock.
+  - package-ecosystem: "uv"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "skip changelog"

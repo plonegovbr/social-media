@@ -1,0 +1,1 @@
+Upgrade the documentation build dependencies: Pillow 13.0.0, urllib3 2.8.0, PyJWT 2.15.1, certifi and setuptools. Dependabot now also opens update pull requests for the frontend and the docs. @ericof
