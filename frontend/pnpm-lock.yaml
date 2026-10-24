@@ -976,7 +976,7 @@ importers:
         specifier: 2.1.5
         version: 2.1.5
       storybook:
-        specifier: ^8.6.19
+        specifier: ^8.6.15
         version: 8.6.19(prettier@3.2.5)
       style-loader:
         specifier: 3.3.1
