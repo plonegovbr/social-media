@@ -1,0 +1,1 @@
+Upgraded the release tooling to release-it 20 and the test runner to vitest 4, and pinned patched versions of transitive development dependencies to resolve Dependabot alerts. @ericof
