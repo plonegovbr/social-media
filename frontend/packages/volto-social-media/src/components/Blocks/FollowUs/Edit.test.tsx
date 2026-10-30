@@ -14,12 +14,14 @@ import config from '@plone/volto/registry';
 import { renderWithStore, screen, within } from '../../../testing';
 import Edit from './Edit';
 import installNetworks from '../../../config/networks';
+import installBlocks from '../../../config/blocks';
 import { siteState } from '../../../stories/fixtures';
 
 let sidebar: HTMLDivElement;
 
 beforeAll(() => {
   installNetworks(config as any);
+  installBlocks(config as any);
 });
 
 beforeEach(() => {
