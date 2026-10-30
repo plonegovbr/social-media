@@ -1,1 +1,0 @@
-Upgrade Volto core to 19.5.1, and pin webpack to the version Volto uses so the Storybook build does not mix two webpack versions. @ericof

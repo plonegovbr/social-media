@@ -1,1 +1,0 @@
-Documented the Follow Us block for the `@blocks-schema` endpoint, with its fields, examples and where its values come from, and its sidebar form now reads the block's schema from the block configuration. @ericof

@@ -7,6 +7,39 @@
 -->
 
 <!-- towncrier release notes start -->
+## 3.1.0 (2026-10-30)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+
+#### Internal
+
+- Upgrade Volto core to 19.5.1, and pin webpack to the version Volto uses so the Storybook build does not mix two webpack versions. @ericof [#25](https://github.com/plonegovbr/social-media/issues/25)
+- Upgraded the release tooling to release-it 20 and the test runner to vitest 4, and pinned patched versions of transitive development dependencies to resolve Dependabot alerts. @ericof [#26](https://github.com/plonegovbr/social-media/issues/26)
+
+
+#### Documentation
+
+- Documented the Follow Us block for the `@blocks-schema` endpoint, with its fields, examples and where its values come from, and its sidebar form now reads the block's schema from the block configuration. @ericof [#31](https://github.com/plonegovbr/social-media/issues/31)
+
+
+
+### Project
+
+
+#### Internal
+
+- Upgrade the documentation build dependencies: Pillow 13.0.0, urllib3 2.8.0, PyJWT 2.15.1, certifi and setuptools. Dependabot now also opens update pull requests for the frontend and the docs. @ericof [#25](https://github.com/plonegovbr/social-media/issues/25)
+
+
+
 ## 3.0.0 (2026-09-15)
 
 ### Backend
