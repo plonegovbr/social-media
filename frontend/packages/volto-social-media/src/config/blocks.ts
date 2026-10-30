@@ -18,7 +18,9 @@ export default function install(config: ConfigType) {
     icon: shareSVG,
     // `@plone/types` describes what Volto hands every block; the schema and
     // the components type what the Follow Us block itself reads.
-    blockSchema: followUsSchema as unknown as BlockConfigBase['blockSchema'],
+    blockSchema: followUsSchema as BlockConfigBase['blockSchema'],
+    // The endpoint calls it with `intl` alone, so the site's links are left
+    // out there and the sidebar supplies them.
     view: FollowUsBlockView as unknown as BlockConfigBase['view'],
     edit: FollowUsBlockEdit as unknown as BlockConfigBase['edit'],
     restricted: false,
