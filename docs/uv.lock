@@ -3837,11 +3837,11 @@ wheels = [
 
 [[package]]
 name = "vale"
-version = "3.21.0.0"
+version = "3.26.0.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f6/b1/8aab734733e8659fcd37469cb1bee576a8419b9cc428483ad5738f576d68/vale-3.21.0.0.tar.gz", hash = "sha256:c8757c37408d4de77a340ac3396d8a743da13d1bf13434ee8b869917a358e038", size = 5368, upload-time = "2026-09-10T07:50:21.51Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/42/183efef5abed6af360d8ac128692a156506f8471014279ed9f05ddae8046/vale-3.26.0.1.tar.gz", hash = "sha256:1db9c31b009a183f15c596bb17a889c6c3f1e88950e8fc307ea1dea17a63cd80", size = 5914, upload-time = "2026-11-02T08:00:02.829Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ba/84/65954c3769f4103f945c332db40386fea44d7c657397dbca6a46181f70ee/vale-3.21.0.0-py3-none-any.whl", hash = "sha256:1a152f930dc9b44b024cfef90f98838204d6cfb6d1aaaba5b62e4744d52b2048", size = 5943, upload-time = "2026-09-10T07:50:20.386Z" },
+    { url = "https://files.pythonhosted.org/packages/13/62/3d223a82abd0c6eb8f9d4885d7f818df99c649990c2031312019f7711c64/vale-3.26.0.1-py3-none-any.whl", hash = "sha256:d5cd1a48b6da7607f1849444259f75307b539796b74662cb29f2b926850c670e", size = 6380, upload-time = "2026-11-02T08:00:01.528Z" },
 ]
 
 [[package]]
